@@ -1,0 +1,2397 @@
+{
+  "models": [
+    "gemma4-e4b",
+    "gemma4-e2b"
+  ],
+  "n_samples": {
+    "gemma4-e4b": 4,
+    "gemma4-e2b": 4
+  },
+  "vocab_size": 110,
+  "decomposition": {
+    "h_total_bits": 99.67033335589262,
+    "h_within_bits": 90.19588929742014,
+    "mi_bits": 9.474444058472569,
+    "meaningful_share": 0.09505781449172236
+  },
+  "boundary": [
+    "implementation",
+    "international",
+    "international sanctions",
+    "legality",
+    "model",
+    "technical"
+  ],
+  "signatures": {
+    "gemma4-e4b": [
+      "model",
+      "interpretation",
+      "need",
+      "yaml m1",
+      "identify",
+      "especially",
+      "surprise",
+      "model sees"
+    ],
+    "gemma4-e2b": [
+      "implementation",
+      "technical",
+      "international sanctions",
+      "international",
+      "legality",
+      "legal compliance",
+      "highest divergence",
+      "specific technical"
+    ]
+  },
+  "tokens": {
+    "code": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "model sees": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "public": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "sanctions": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": [
+        "legal"
+      ]
+    },
+    "team publishes": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "kaggle": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "provided": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "significant": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "boundary": {
+      "mi": 0.0,
+      "log_bf": -0.9656638164914542,
+      "h_total": 0.4689955935892812,
+      "h_within": 0.4689955935892812,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 8,
+      "echo": true,
+      "senses": [
+        "ambiguous"
+      ]
+    },
+    "list": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "adds": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "agent's code": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "kaggle pays": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "post-processes tool": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "divergence": {
+      "mi": 0.0,
+      "log_bf": -0.9656638164914542,
+      "h_total": 0.4689955935892812,
+      "h_within": 0.4689955935892812,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 8,
+      "echo": true,
+      "senses": []
+    },
+    "sees": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "russia": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "model": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "based": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "not": {
+      "mi": 0.04678484847737541,
+      "log_bf": -0.203523764444558,
+      "h_total": 0.7219280948873623,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.2216896946470509,
+        "gemma4-e2b": 0.16781682137412193
+      },
+      "support": 7,
+      "echo": true,
+      "senses": []
+    },
+    "notebook": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "post-processes": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "interpretation": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.1
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 0
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 2,
+      "echo": false,
+      "senses": [
+        "ambiguous"
+      ]
+    },
+    "team": {
+      "mi": 0.04678484847737541,
+      "log_bf": -0.203523764444558,
+      "h_total": 0.7219280948873623,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.16781682137412193,
+        "gemma4-e2b": 0.2216896946470509
+      },
+      "support": 7,
+      "echo": true,
+      "senses": []
+    },
+    "agent's": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "pays": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "custom": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "kaggle notebook": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "sanctions list": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": [
+        "legal"
+      ]
+    },
+    "tool output": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "team adds": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "models answers": {
+      "mi": 0.0,
+      "log_bf": -0.6649763035932486,
+      "h_total": 1.0,
+      "h_within": 1.0,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 4,
+      "echo": false,
+      "senses": []
+    },
+    "boundary tokens": {
+      "mi": 0.0,
+      "log_bf": -0.9656638164914542,
+      "h_total": 0.4689955935892812,
+      "h_within": 0.4689955935892812,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 8,
+      "echo": true,
+      "senses": [
+        "ambiguous"
+      ]
+    },
+    "data": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": false,
+      "senses": []
+    },
+    "surprise": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "largest": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": false,
+      "senses": []
+    },
+    "answers": {
+      "mi": 0.04678484847737541,
+      "log_bf": -0.203523764444558,
+      "h_total": 0.7219280948873623,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.2216896946470509,
+        "gemma4-e2b": 0.16781682137412193
+      },
+      "support": 7,
+      "echo": true,
+      "senses": []
+    },
+    "provided data": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": false,
+      "senses": []
+    },
+    "resident": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "publishes": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "prize": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "difference": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "tool": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "public kaggle": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "output": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "tokens": {
+      "mi": 0.0,
+      "log_bf": -0.9656638164914542,
+      "h_total": 0.4689955935892812,
+      "h_within": 0.4689955935892812,
+      "rates": {
+        "gemma4-e4b": 0.9,
+        "gemma4-e2b": 0.9
+      },
+      "raw": {
+        "gemma4-e4b": 4,
+        "gemma4-e2b": 4
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 8,
+      "echo": true,
+      "senses": []
+    },
+    "custom tool": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "models": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "agent": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 6,
+      "echo": true,
+      "senses": []
+    },
+    "agent yaml": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "causing": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "submits": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "statements": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "team submits": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "python agent": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "yaml": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "py entrypoint": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "reasoning": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 3,
+      "echo": false,
+      "senses": []
+    },
+    "specific": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "agent py": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "declarative": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "python": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "meaningful surprise": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": false,
+      "senses": []
+    },
+    "declarative agent": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "need": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.1
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 0
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "instead": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "yaml m1": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.1
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 0
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 2,
+      "echo": true,
+      "senses": []
+    },
+    "identify": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.1
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 0
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "list m1": {
+      "mi": 0.1187091007693073,
+      "log_bf": 0.3566749439387298,
+      "h_total": 1.0,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.48895696853457926,
+        "gemma4-e2b": 0.48895696853457926
+      },
+      "support": 4,
+      "echo": true,
+      "senses": []
+    },
+    "entrypoint": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "meaningful": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 6,
+      "echo": false,
+      "senses": []
+    },
+    "entrypoint instead": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.7,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 3,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 5,
+      "echo": true,
+      "senses": []
+    },
+    "analysis": {
+      "mi": 0.0,
+      "log_bf": -0.6649763035932486,
+      "h_total": 1.0,
+      "h_within": 1.0,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 4,
+      "echo": false,
+      "senses": []
+    },
+    "two": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "legal": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": true,
+      "senses": [
+        "legal"
+      ]
+    },
+    "banned": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": true,
+      "senses": [
+        "banned"
+      ]
+    },
+    "illegal": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 0.12576938349798225,
+        "gemma4-e2b": 0.1187091007693073
+      },
+      "support": 5,
+      "echo": true,
+      "senses": [
+        "legal"
+      ]
+    },
+    "especially": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.5,
+        "gemma4-e2b": 0.1
+      },
+      "raw": {
+        "gemma4-e4b": 2,
+        "gemma4-e2b": 0
+      },
+      "surprise": {
+        "gemma4-e4b": 0.7369655941662061,
+        "gemma4-e2b": 0.5310044064107189
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "statement": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 3,
+      "echo": false,
+      "senses": []
+    },
+    "different": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "legal not": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 3,
+      "echo": true,
+      "senses": [
+        "legal"
+      ]
+    },
+    "strong": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "relate": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "status": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "suggesting": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "not banned": {
+      "mi": 0.03030514483932223,
+      "log_bf": -0.4054651081081637,
+      "h_total": 0.9709505944546686,
+      "h_within": 0.9406454496153464,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.1187091007693073,
+        "gemma4-e2b": 0.12576938349798225
+      },
+      "support": 3,
+      "echo": true,
+      "senses": [
+        "banned"
+      ]
+    },
+    "policy": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": [
+        "banned"
+      ]
+    },
+    "cause": {
+      "mi": 0.0,
+      "log_bf": -0.6830968447064434,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.8812908992306927,
+      "rates": {
+        "gemma4-e4b": 0.3,
+        "gemma4-e2b": 0.3
+      },
+      "raw": {
+        "gemma4-e4b": 1,
+        "gemma4-e2b": 1
+      },
+      "surprise": {
+        "gemma4-e4b": 0.0,
+        "gemma4-e2b": 0.0
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "legal compliance": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": [
+        "legal"
+      ]
+    },
+    "implementation": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 3,
+      "echo": false,
+      "senses": []
+    },
+    "highest divergence": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "specific technical": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "technical": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 3,
+      "echo": false,
+      "senses": []
+    },
+    "related": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "appear": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "questions": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "interpret": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": [
+        "ambiguous"
+      ]
+    },
+    "highest": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "actions": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "compliance": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": [
+        "legal"
+      ]
+    },
+    "international sanctions": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 3,
+      "echo": false,
+      "senses": [
+        "legal"
+      ]
+    },
+    "versus": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "significant divergence": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "technical implementation": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "international": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 3,
+      "echo": false,
+      "senses": []
+    },
+    "legality": {
+      "mi": 0.2958073480446818,
+      "log_bf": 2.0512706647131402,
+      "h_total": 0.9709505944546687,
+      "h_within": 0.6751432464099869,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.7
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 3
+      },
+      "surprise": {
+        "gemma4-e4b": 1.14573075844328,
+        "gemma4-e2b": 1.4896596952239758
+      },
+      "support": 3,
+      "echo": false,
+      "senses": [
+        "legal"
+      ]
+    },
+    "ethical": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "high": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "split": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    },
+    "show": {
+      "mi": 0.14679310243605204,
+      "log_bf": 0.7519876805828822,
+      "h_total": 0.8812908992306927,
+      "h_within": 0.7344977967946407,
+      "rates": {
+        "gemma4-e4b": 0.1,
+        "gemma4-e2b": 0.5
+      },
+      "raw": {
+        "gemma4-e4b": 0,
+        "gemma4-e2b": 2
+      },
+      "surprise": {
+        "gemma4-e4b": 0.5310044064107189,
+        "gemma4-e2b": 0.7369655941662061
+      },
+      "support": 2,
+      "echo": false,
+      "senses": []
+    }
+  },
+  "level": 0,
+  "labels": {
+    "gemma4-e4b": "M1",
+    "gemma4-e2b": "M2"
+  },
+  "jaccard_prev": null
+}

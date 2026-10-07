@@ -1,0 +1,494 @@
+[
+  {
+    "level": 0,
+    "n_samples": 8,
+    "n_terms": 110,
+    "layers": [
+      32,
+      8
+    ],
+    "max_mi_possible_bits": 1.0,
+    "units": [
+      {
+        "unit": 0,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "international sanctions",
+          "international",
+          "implementation",
+          "legality",
+          "technical",
+          "significant",
+          "sanctions list",
+          "technical implementation"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.2481589490899211,
+          "gemma4-e2b": 0.7500519050884046
+        }
+      },
+      {
+        "unit": 1,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "sanctions list",
+          "list",
+          "kaggle pays",
+          "sanctions",
+          "kaggle",
+          "resident",
+          "implementation",
+          "significant"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.36082759803617825,
+          "gemma4-e2b": 0.8379716569951664
+        }
+      },
+      {
+        "unit": 2,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "yaml",
+          "declarative agent",
+          "agent yaml",
+          "declarative",
+          "instead",
+          "team submits",
+          "python agent",
+          "agent py"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.8484694315227653,
+          "gemma4-e2b": 0.27955716531713165
+        }
+      },
+      {
+        "unit": 3,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "sanctions list",
+          "list",
+          "sanctions",
+          "kaggle pays",
+          "kaggle",
+          "russia",
+          "resident",
+          "pays"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.4609848234813163,
+          "gemma4-e2b": 0.9377821854787236
+        }
+      },
+      {
+        "unit": 4,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "output",
+          "model",
+          "tool output",
+          "post-processes",
+          "model sees",
+          "team adds",
+          "adds",
+          "sees"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.9946117257077305,
+          "gemma4-e2b": 0.2639639949191874
+        }
+      },
+      {
+        "unit": 5,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "yaml",
+          "declarative agent",
+          "agent yaml",
+          "declarative",
+          "instead",
+          "python agent",
+          "team submits",
+          "agent py"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.7629583491010514,
+          "gemma4-e2b": 0.2519109443438477
+        }
+      },
+      {
+        "unit": 6,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "yaml",
+          "declarative agent",
+          "agent yaml",
+          "declarative",
+          "model",
+          "instead",
+          "team submits",
+          "python agent"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.8414714075982376,
+          "gemma4-e2b": 0.2555775149517563
+        }
+      },
+      {
+        "unit": 7,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "model",
+          "yaml",
+          "declarative agent",
+          "output",
+          "tool output",
+          "post-processes",
+          "declarative",
+          "agent yaml"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.9882141222820653,
+          "gemma4-e2b": 0.2877724659696115
+        }
+      }
+    ],
+    "overlap_with_bayes_boundary": [
+      "implementation",
+      "international",
+      "international sanctions",
+      "legality",
+      "technical"
+    ]
+  },
+  {
+    "level": 1,
+    "n_samples": 8,
+    "n_terms": 102,
+    "layers": [
+      32,
+      8
+    ],
+    "max_mi_possible_bits": 1.0,
+    "units": [
+      {
+        "unit": 0,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "two models",
+          "option seems",
+          "option",
+          "two",
+          "leading",
+          "instances",
+          "chosen option",
+          "chosen"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.089525222091629,
+          "gemma4-e2b": 0.9964043185778333
+        }
+      },
+      {
+        "unit": 1,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "model",
+          "implementation",
+          "based",
+          "provided",
+          "token",
+          "technical",
+          "discussing",
+          "model m2"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.9976690487002432,
+          "gemma4-e2b": 0.05079678009243629
+        }
+      },
+      {
+        "unit": 2,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "diverge significantly",
+          "counter-intuitive",
+          "seems",
+          "specific statement",
+          "statement",
+          "model's reasoning",
+          "models diverge",
+          "diverge"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.26850950895788056,
+          "gemma4-e2b": 0.9968379361824076
+        }
+      },
+      {
+        "unit": 3,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "diverge significantly",
+          "counter-intuitive",
+          "seems",
+          "specific statement",
+          "statement",
+          "model's reasoning",
+          "models diverge",
+          "diverge"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.33388910674045763,
+          "gemma4-e2b": 0.9913832875016932
+        }
+      },
+      {
+        "unit": 4,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "two models",
+          "option seems",
+          "option",
+          "two",
+          "leading",
+          "instances",
+          "chosen option",
+          "chosen"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.08610828881027716,
+          "gemma4-e2b": 0.9961534091500887
+        }
+      },
+      {
+        "unit": 5,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "diverge significantly",
+          "two models",
+          "counter-intuitive",
+          "option seems",
+          "seems",
+          "two",
+          "specific statement",
+          "option"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.22781201204805152,
+          "gemma4-e2b": 0.9990299034525979
+        }
+      },
+      {
+        "unit": 6,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "option seems",
+          "two models",
+          "option",
+          "two",
+          "leading",
+          "instances",
+          "chosen option",
+          "chosen"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.04398866683745446,
+          "gemma4-e2b": 0.995456146581426
+        }
+      },
+      {
+        "unit": 7,
+        "mi_bits": 1.0,
+        "top_terms": [
+          "diverge significantly",
+          "counter-intuitive",
+          "seems",
+          "specific statement",
+          "statement",
+          "model's reasoning",
+          "models diverge",
+          "diverge"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.24652152653452808,
+          "gemma4-e2b": 0.9986983577892186
+        }
+      }
+    ],
+    "overlap_with_bayes_boundary": [
+      "chosen",
+      "chosen option",
+      "instances",
+      "leading",
+      "option",
+      "option seems",
+      "two",
+      "two models"
+    ]
+  },
+  {
+    "level": 2,
+    "n_samples": 8,
+    "n_terms": 100,
+    "layers": [
+      32,
+      8
+    ],
+    "max_mi_possible_bits": 1.0,
+    "units": [
+      {
+        "unit": 1,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "option instances",
+          "option",
+          "chosen",
+          "chosen option",
+          "chosen chosen",
+          "leading",
+          "two two",
+          "leading two"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.9534725247963347,
+          "gemma4-e2b": 0.2885748764972121
+        }
+      },
+      {
+        "unit": 2,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "significantly",
+          "frequency",
+          "m2 identifies",
+          "model",
+          "divergence",
+          "tokens",
+          "surprise",
+          "answers"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.8094331624322082,
+          "gemma4-e2b": 0.9350283903562044
+        }
+      },
+      {
+        "unit": 3,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "divergence",
+          "surprise",
+          "tokens",
+          "answers",
+          "significantly",
+          "provided",
+          "meaningful surprise",
+          "based"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.9603579969114086,
+          "gemma4-e2b": 0.9781835140209862
+        }
+      },
+      {
+        "unit": 4,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "leading",
+          "option seems",
+          "reasoning",
+          "two two",
+          "instances leading",
+          "reasoning leading",
+          "leading two",
+          "option option"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.5361377155543341,
+          "gemma4-e2b": 0.24848904210057612
+        }
+      },
+      {
+        "unit": 6,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "leading",
+          "option seems",
+          "reasoning",
+          "reasoning leading",
+          "two two",
+          "instances leading",
+          "leading two",
+          "seems reasoning"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.5112897229249409,
+          "gemma4-e2b": 0.2568274759710676
+        }
+      },
+      {
+        "unit": 7,
+        "mi_bits": 0.18872187554086717,
+        "top_terms": [
+          "significantly",
+          "model",
+          "frequency",
+          "m2 identifies",
+          "divergence",
+          "based",
+          "tokens",
+          "surprise"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.6758260069354999,
+          "gemma4-e2b": 0.8741660897323416
+        }
+      },
+      {
+        "unit": 0,
+        "mi_bits": 0.0,
+        "top_terms": [
+          "models",
+          "two",
+          "two models",
+          "core",
+          "find",
+          "core concept",
+          "provided excerpts",
+          "excerpts"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.49664695510378554,
+          "gemma4-e2b": 0.702114162293414
+        }
+      },
+      {
+        "unit": 5,
+        "mi_bits": 0.0,
+        "top_terms": [
+          "model",
+          "significantly",
+          "frequency",
+          "divergence",
+          "surprise",
+          "tokens",
+          "based",
+          "provided"
+        ],
+        "mean_activation": {
+          "gemma4-e4b": 0.8406555857022121,
+          "gemma4-e2b": 0.8769040014098617
+        }
+      }
+    ],
+    "overlap_with_bayes_boundary": [
+      "chosen",
+      "chosen option",
+      "m2 identifies",
+      "option",
+      "option instances"
+    ]
+  }
+]

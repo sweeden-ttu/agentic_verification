@@ -1,0 +1,18 @@
+The question at the end was put to several anonymous models. Their answers diverged. These tokens carried the most information about which model wrote an answer (share of each model's answers that use the token):
+- "chosen": M1 10%, M2 90%
+- "chosen option": M1 10%, M2 90%
+- "instances": M1 10%, M2 90%
+- "leading": M1 10%, M2 90%
+- "option": M1 10%, M2 90%
+- "option seems": M1 10%, M2 90%
+- "reasoning leading": M1 10%, M2 90%
+- "two": M1 10%, M2 90%
+- "two models": M1 10%, M2 90%
+- "counter-intuitive": M1 30%, M2 90%
+- "data provided": M1 10%, M2 70%
+- "diverge": M1 30%, M2 90%
+One answer excerpt per model:
+M1: "Based on the provided information, the boundary tokens that signify a meaningful surprise in the divergence of the answers are those that appear with a significantly different frequency between M1 and M2. We can analyze the token distribution to see where the models differ most: "
+M2: "The boundary tokens that M2 identifies as indicating a meaningful surprise in the divergence of answers are: * **"boundary tokens"** (M2's core concept for what signifies surprise) * **Instances where the two models diverge significantly on a specific statement.** * **Where one m"
+
+What are the boundary tokens we find meaningul surprise in the divergence of its answers?

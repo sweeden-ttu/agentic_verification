@@ -1,0 +1,12 @@
+The question at the end was put to several anonymous models. Their answers diverged. These tokens carried the most information about which model wrote an answer (share of each model's answers that use the token):
+- "implementation": M1 70%, M2 10%
+- "international": M1 70%, M2 10%
+- "international sanctions": M1 70%, M2 10%
+- "legality": M1 70%, M2 10%
+- "model": M1 30%, M2 90%
+- "technical": M1 70%, M2 10%
+One answer excerpt per model:
+M1: "Based on the provided data, the boundary tokens that seem to cause the most significant divergence in answers are those that deal with **legal compliance, specific technical implementations, and geopolitical/ethical considerations.** Here are the key observations and the correspo"
+M2: "Based on the data provided, the **boundary tokens** that indicate a meaningful surprise are the instances where the two models diverge significantly on a specific statement, especially when one model's reasoning (leading to its chosen option) seems more counter-intuitive or contr"
+
+What are the boundary tokens we find meaningul surprise in the divergence of its answers?

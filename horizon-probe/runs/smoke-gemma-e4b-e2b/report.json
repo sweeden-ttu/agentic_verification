@@ -1,0 +1,1416 @@
+{
+  "mcq": {
+    "totals": {
+      "h_total_bits": 64.14481780397186,
+      "h_within_bits": 55.910124065540394,
+      "mi_bits": 8.234693738431465,
+      "meaningful_share": 0.1283766018885094,
+      "boundary_items": [
+        "i16",
+        "i36",
+        "i07",
+        "i02",
+        "i34",
+        "i17",
+        "i10",
+        "i01",
+        "i24",
+        "i08",
+        "i31",
+        "i30",
+        "i14",
+        "i09",
+        "i03",
+        "i06",
+        "i12",
+        "i33",
+        "i28",
+        "i38",
+        "i05",
+        "i29",
+        "i37",
+        "i11"
+      ]
+    },
+    "summary": {
+      "gemma4-e4b": {
+        "items": 38,
+        "quadrants": {
+          "A": 31,
+          "B": 2,
+          "C": 5,
+          "D": 0
+        },
+        "mean_p_legal": 0.7263013655089241,
+        "mean_p_banned": 0.39488990016771547,
+        "conflation_banned_as_illegal": 0.25,
+        "anchor_accuracy": 0.3684210526315789,
+        "invalid_answers": 0
+      },
+      "gemma4-e2b": {
+        "items": 38,
+        "quadrants": {
+          "A": 1,
+          "B": 36,
+          "C": 1,
+          "D": 0
+        },
+        "mean_p_legal": 0.8434353324171391,
+        "mean_p_banned": 0.7500063651757213,
+        "conflation_banned_as_illegal": 0.0,
+        "anchor_accuracy": 0.6842105263157895,
+        "invalid_answers": 2
+      }
+    }
+  },
+  "recurse": {
+    "levels": [
+      {
+        "level": 0,
+        "boundary": [
+          "implementation",
+          "international",
+          "international sanctions",
+          "legality",
+          "model",
+          "technical"
+        ],
+        "decomposition": {
+          "h_total_bits": 99.67033335589262,
+          "h_within_bits": 90.19588929742014,
+          "mi_bits": 9.474444058472569,
+          "meaningful_share": 0.09505781449172236
+        },
+        "jaccard_prev": null,
+        "vocab_size": 110
+      },
+      {
+        "level": 1,
+        "boundary": [
+          "chosen",
+          "chosen option",
+          "instances",
+          "leading",
+          "option",
+          "option seems",
+          "reasoning leading",
+          "two",
+          "two models",
+          "counter-intuitive",
+          "data provided",
+          "diverge",
+          "diverge significantly",
+          "especially",
+          "model's reasoning",
+          "models diverge",
+          "seems",
+          "specific statement",
+          "statement",
+          "statement especially"
+        ],
+        "decomposition": {
+          "h_total_bits": 90.24067026368179,
+          "h_within_bits": 77.36705473049254,
+          "mi_bits": 12.873615533189355,
+          "meaningful_share": 0.14265868699304712
+        },
+        "jaccard_prev": 0.0,
+        "vocab_size": 102
+      },
+      {
+        "level": 2,
+        "boundary": [
+          "appear",
+          "different frequency",
+          "chosen",
+          "chosen option",
+          "different",
+          "identifies",
+          "information",
+          "information provided",
+          "m2 identifies",
+          "option",
+          "option instances",
+          "significantly different",
+          "signify"
+        ],
+        "decomposition": {
+          "h_total_bits": 88.57301783453715,
+          "h_within_bits": 80.73326679793315,
+          "mi_bits": 7.839751036604007,
+          "meaningful_share": 0.08851172996328757
+        },
+        "jaccard_prev": 0.1,
+        "vocab_size": 100
+      }
+    ],
+    "stop_reason": "depth reached"
+  },
+  "dbn": [
+    {
+      "level": 0,
+      "n_samples": 8,
+      "n_terms": 110,
+      "layers": [
+        32,
+        8
+      ],
+      "max_mi_possible_bits": 1.0,
+      "units": [
+        {
+          "unit": 0,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "international sanctions",
+            "international",
+            "implementation",
+            "legality",
+            "technical",
+            "significant",
+            "sanctions list",
+            "technical implementation"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.2481589490899211,
+            "gemma4-e2b": 0.7500519050884046
+          }
+        },
+        {
+          "unit": 1,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "sanctions list",
+            "list",
+            "kaggle pays",
+            "sanctions",
+            "kaggle",
+            "resident",
+            "implementation",
+            "significant"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.36082759803617825,
+            "gemma4-e2b": 0.8379716569951664
+          }
+        },
+        {
+          "unit": 2,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "yaml",
+            "declarative agent",
+            "agent yaml",
+            "declarative",
+            "instead",
+            "team submits",
+            "python agent",
+            "agent py"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.8484694315227653,
+            "gemma4-e2b": 0.27955716531713165
+          }
+        },
+        {
+          "unit": 3,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "sanctions list",
+            "list",
+            "sanctions",
+            "kaggle pays",
+            "kaggle",
+            "russia",
+            "resident",
+            "pays"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.4609848234813163,
+            "gemma4-e2b": 0.9377821854787236
+          }
+        },
+        {
+          "unit": 4,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "output",
+            "model",
+            "tool output",
+            "post-processes",
+            "model sees",
+            "team adds",
+            "adds",
+            "sees"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.9946117257077305,
+            "gemma4-e2b": 0.2639639949191874
+          }
+        },
+        {
+          "unit": 5,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "yaml",
+            "declarative agent",
+            "agent yaml",
+            "declarative",
+            "instead",
+            "python agent",
+            "team submits",
+            "agent py"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.7629583491010514,
+            "gemma4-e2b": 0.2519109443438477
+          }
+        },
+        {
+          "unit": 6,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "yaml",
+            "declarative agent",
+            "agent yaml",
+            "declarative",
+            "model",
+            "instead",
+            "team submits",
+            "python agent"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.8414714075982376,
+            "gemma4-e2b": 0.2555775149517563
+          }
+        },
+        {
+          "unit": 7,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "model",
+            "yaml",
+            "declarative agent",
+            "output",
+            "tool output",
+            "post-processes",
+            "declarative",
+            "agent yaml"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.9882141222820653,
+            "gemma4-e2b": 0.2877724659696115
+          }
+        }
+      ],
+      "overlap_with_bayes_boundary": [
+        "implementation",
+        "international",
+        "international sanctions",
+        "legality",
+        "technical"
+      ]
+    },
+    {
+      "level": 1,
+      "n_samples": 8,
+      "n_terms": 102,
+      "layers": [
+        32,
+        8
+      ],
+      "max_mi_possible_bits": 1.0,
+      "units": [
+        {
+          "unit": 0,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "two models",
+            "option seems",
+            "option",
+            "two",
+            "leading",
+            "instances",
+            "chosen option",
+            "chosen"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.089525222091629,
+            "gemma4-e2b": 0.9964043185778333
+          }
+        },
+        {
+          "unit": 1,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "model",
+            "implementation",
+            "based",
+            "provided",
+            "token",
+            "technical",
+            "discussing",
+            "model m2"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.9976690487002432,
+            "gemma4-e2b": 0.05079678009243629
+          }
+        },
+        {
+          "unit": 2,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "diverge significantly",
+            "counter-intuitive",
+            "seems",
+            "specific statement",
+            "statement",
+            "model's reasoning",
+            "models diverge",
+            "diverge"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.26850950895788056,
+            "gemma4-e2b": 0.9968379361824076
+          }
+        },
+        {
+          "unit": 3,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "diverge significantly",
+            "counter-intuitive",
+            "seems",
+            "specific statement",
+            "statement",
+            "model's reasoning",
+            "models diverge",
+            "diverge"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.33388910674045763,
+            "gemma4-e2b": 0.9913832875016932
+          }
+        },
+        {
+          "unit": 4,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "two models",
+            "option seems",
+            "option",
+            "two",
+            "leading",
+            "instances",
+            "chosen option",
+            "chosen"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.08610828881027716,
+            "gemma4-e2b": 0.9961534091500887
+          }
+        },
+        {
+          "unit": 5,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "diverge significantly",
+            "two models",
+            "counter-intuitive",
+            "option seems",
+            "seems",
+            "two",
+            "specific statement",
+            "option"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.22781201204805152,
+            "gemma4-e2b": 0.9990299034525979
+          }
+        },
+        {
+          "unit": 6,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "option seems",
+            "two models",
+            "option",
+            "two",
+            "leading",
+            "instances",
+            "chosen option",
+            "chosen"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.04398866683745446,
+            "gemma4-e2b": 0.995456146581426
+          }
+        },
+        {
+          "unit": 7,
+          "mi_bits": 1.0,
+          "top_terms": [
+            "diverge significantly",
+            "counter-intuitive",
+            "seems",
+            "specific statement",
+            "statement",
+            "model's reasoning",
+            "models diverge",
+            "diverge"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.24652152653452808,
+            "gemma4-e2b": 0.9986983577892186
+          }
+        }
+      ],
+      "overlap_with_bayes_boundary": [
+        "chosen",
+        "chosen option",
+        "instances",
+        "leading",
+        "option",
+        "option seems",
+        "two",
+        "two models"
+      ]
+    },
+    {
+      "level": 2,
+      "n_samples": 8,
+      "n_terms": 100,
+      "layers": [
+        32,
+        8
+      ],
+      "max_mi_possible_bits": 1.0,
+      "units": [
+        {
+          "unit": 1,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "option instances",
+            "option",
+            "chosen",
+            "chosen option",
+            "chosen chosen",
+            "leading",
+            "two two",
+            "leading two"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.9534725247963347,
+            "gemma4-e2b": 0.2885748764972121
+          }
+        },
+        {
+          "unit": 2,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "significantly",
+            "frequency",
+            "m2 identifies",
+            "model",
+            "divergence",
+            "tokens",
+            "surprise",
+            "answers"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.8094331624322082,
+            "gemma4-e2b": 0.9350283903562044
+          }
+        },
+        {
+          "unit": 3,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "divergence",
+            "surprise",
+            "tokens",
+            "answers",
+            "significantly",
+            "provided",
+            "meaningful surprise",
+            "based"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.9603579969114086,
+            "gemma4-e2b": 0.9781835140209862
+          }
+        },
+        {
+          "unit": 4,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "leading",
+            "option seems",
+            "reasoning",
+            "two two",
+            "instances leading",
+            "reasoning leading",
+            "leading two",
+            "option option"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.5361377155543341,
+            "gemma4-e2b": 0.24848904210057612
+          }
+        },
+        {
+          "unit": 6,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "leading",
+            "option seems",
+            "reasoning",
+            "reasoning leading",
+            "two two",
+            "instances leading",
+            "leading two",
+            "seems reasoning"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.5112897229249409,
+            "gemma4-e2b": 0.2568274759710676
+          }
+        },
+        {
+          "unit": 7,
+          "mi_bits": 0.18872187554086717,
+          "top_terms": [
+            "significantly",
+            "model",
+            "frequency",
+            "m2 identifies",
+            "divergence",
+            "based",
+            "tokens",
+            "surprise"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.6758260069354999,
+            "gemma4-e2b": 0.8741660897323416
+          }
+        },
+        {
+          "unit": 0,
+          "mi_bits": 0.0,
+          "top_terms": [
+            "models",
+            "two",
+            "two models",
+            "core",
+            "find",
+            "core concept",
+            "provided excerpts",
+            "excerpts"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.49664695510378554,
+            "gemma4-e2b": 0.702114162293414
+          }
+        },
+        {
+          "unit": 5,
+          "mi_bits": 0.0,
+          "top_terms": [
+            "model",
+            "significantly",
+            "frequency",
+            "divergence",
+            "surprise",
+            "tokens",
+            "based",
+            "provided"
+          ],
+          "mean_activation": {
+            "gemma4-e4b": 0.8406555857022121,
+            "gemma4-e2b": 0.8769040014098617
+          }
+        }
+      ],
+      "overlap_with_bayes_boundary": [
+        "chosen",
+        "chosen option",
+        "m2 identifies",
+        "option",
+        "option instances"
+      ]
+    }
+  ],
+  "prolog": {
+    "boundary_item": [
+      [
+        "i01",
+        "banned",
+        "0.279707",
+        "2.807956"
+      ],
+      [
+        "i02",
+        "legal",
+        "0.385887",
+        "4.358078"
+      ],
+      [
+        "i03",
+        "banned",
+        "0.24213",
+        "2.115865"
+      ],
+      [
+        "i05",
+        "banned",
+        "0.202447",
+        "1.495325"
+      ],
+      [
+        "i06",
+        "banned",
+        "0.228836",
+        "1.668456"
+      ],
+      [
+        "i07",
+        "banned",
+        "0.387668",
+        "4.076766"
+      ],
+      [
+        "i08",
+        "banned",
+        "0.268708",
+        "2.370144"
+      ],
+      [
+        "i09",
+        "banned",
+        "0.245731",
+        "2.424557"
+      ],
+      [
+        "i10",
+        "banned",
+        "0.286099",
+        "2.191348"
+      ],
+      [
+        "i11",
+        "banned",
+        "0.183457",
+        "1.042272"
+      ],
+      [
+        "i12",
+        "banned",
+        "0.220743",
+        "1.575991"
+      ],
+      [
+        "i14",
+        "banned",
+        "0.246918",
+        "1.807596"
+      ],
+      [
+        "i16",
+        "banned",
+        "0.401286",
+        "3.302973"
+      ],
+      [
+        "i17",
+        "banned",
+        "0.296033",
+        "2.625298"
+      ],
+      [
+        "i24",
+        "legal",
+        "0.274699",
+        "2.196854"
+      ],
+      [
+        "i28",
+        "banned",
+        "0.20891",
+        "1.35098"
+      ],
+      [
+        "i29",
+        "banned",
+        "0.196446",
+        "1.242136"
+      ],
+      [
+        "i30",
+        "banned",
+        "0.252059",
+        "1.922814"
+      ],
+      [
+        "i31",
+        "banned",
+        "0.265353",
+        "2.058087"
+      ],
+      [
+        "i33",
+        "banned",
+        "0.212256",
+        "1.33425"
+      ],
+      [
+        "i34",
+        "banned",
+        "0.354432",
+        "3.568763"
+      ],
+      [
+        "i36",
+        "legal",
+        "0.389933",
+        "2.61738"
+      ],
+      [
+        "i37",
+        "banned",
+        "0.195739",
+        "1.379086"
+      ],
+      [
+        "i38",
+        "banned",
+        "0.204582",
+        "1.247102"
+      ]
+    ],
+    "split": [
+      [
+        "i02",
+        "legal",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i09",
+        "legal",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i24",
+        "legal",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i25",
+        "legal",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i36",
+        "legal",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i03",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i05",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i06",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i07",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i08",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i10",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i11",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i12",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i13",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i14",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i16",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i17",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i18",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i19",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i20",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i21",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i27",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i28",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i29",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i30",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i31",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i33",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i34",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i35",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i36",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ],
+      [
+        "i38",
+        "banned",
+        "gemma4-e2b",
+        "gemma4-e4b"
+      ]
+    ],
+    "universal": [
+      [
+        "i15",
+        "a"
+      ],
+      [
+        "i22",
+        "b"
+      ]
+    ],
+    "universal_side": [
+      [
+        "legal",
+        "i01",
+        "legal"
+      ],
+      [
+        "banned",
+        "i01",
+        "banned"
+      ],
+      [
+        "banned",
+        "i02",
+        "banned"
+      ],
+      [
+        "legal",
+        "i03",
+        "legal"
+      ],
+      [
+        "legal",
+        "i04",
+        "illegal"
+      ],
+      [
+        "banned",
+        "i04",
+        "banned"
+      ],
+      [
+        "legal",
+        "i05",
+        "legal"
+      ],
+      [
+        "legal",
+        "i06",
+        "legal"
+      ],
+      [
+        "legal",
+        "i07",
+        "legal"
+      ],
+      [
+        "legal",
+        "i08",
+        "legal"
+      ],
+      [
+        "banned",
+        "i09",
+        "banned"
+      ],
+      [
+        "legal",
+        "i10",
+        "legal"
+      ],
+      [
+        "legal",
+        "i11",
+        "legal"
+      ],
+      [
+        "legal",
+        "i12",
+        "legal"
+      ],
+      [
+        "legal",
+        "i13",
+        "legal"
+      ],
+      [
+        "legal",
+        "i14",
+        "legal"
+      ],
+      [
+        "legal",
+        "i15",
+        "legal"
+      ],
+      [
+        "banned",
+        "i15",
+        "not_banned"
+      ],
+      [
+        "legal",
+        "i16",
+        "legal"
+      ],
+      [
+        "legal",
+        "i17",
+        "legal"
+      ],
+      [
+        "legal",
+        "i18",
+        "legal"
+      ],
+      [
+        "legal",
+        "i19",
+        "legal"
+      ],
+      [
+        "legal",
+        "i20",
+        "legal"
+      ],
+      [
+        "legal",
+        "i21",
+        "legal"
+      ],
+      [
+        "legal",
+        "i22",
+        "legal"
+      ],
+      [
+        "banned",
+        "i22",
+        "banned"
+      ],
+      [
+        "legal",
+        "i23",
+        "legal"
+      ],
+      [
+        "banned",
+        "i23",
+        "banned"
+      ],
+      [
+        "banned",
+        "i24",
+        "banned"
+      ],
+      [
+        "banned",
+        "i25",
+        "banned"
+      ],
+      [
+        "legal",
+        "i26",
+        "legal"
+      ],
+      [
+        "banned",
+        "i26",
+        "banned"
+      ],
+      [
+        "legal",
+        "i27",
+        "legal"
+      ],
+      [
+        "legal",
+        "i28",
+        "legal"
+      ],
+      [
+        "legal",
+        "i29",
+        "legal"
+      ],
+      [
+        "legal",
+        "i30",
+        "legal"
+      ],
+      [
+        "legal",
+        "i31",
+        "legal"
+      ],
+      [
+        "legal",
+        "i32",
+        "legal"
+      ],
+      [
+        "banned",
+        "i32",
+        "banned"
+      ],
+      [
+        "legal",
+        "i33",
+        "legal"
+      ],
+      [
+        "legal",
+        "i34",
+        "legal"
+      ],
+      [
+        "legal",
+        "i35",
+        "legal"
+      ],
+      [
+        "legal",
+        "i37",
+        "legal"
+      ],
+      [
+        "banned",
+        "i37",
+        "banned"
+      ],
+      [
+        "legal",
+        "i38",
+        "legal"
+      ]
+    ],
+    "conflation": [
+      [
+        "gemma4-e4b",
+        "3",
+        "12"
+      ],
+      [
+        "gemma4-e2b",
+        "0",
+        "12"
+      ]
+    ],
+    "anchor": [
+      [
+        "gemma4-e4b",
+        "7",
+        "19"
+      ],
+      [
+        "gemma4-e2b",
+        "13",
+        "19"
+      ]
+    ],
+    "horizon": [
+      [
+        "gemma4-e4b",
+        "disputed",
+        "legal",
+        "12",
+        "12"
+      ],
+      [
+        "gemma4-e4b",
+        "disputed",
+        "banned",
+        "2",
+        "12"
+      ],
+      [
+        "gemma4-e4b",
+        "error",
+        "legal",
+        "1",
+        "3"
+      ],
+      [
+        "gemma4-e4b",
+        "error",
+        "banned",
+        "3",
+        "3"
+      ],
+      [
+        "gemma4-e4b",
+        "rule_allowed",
+        "legal",
+        "6",
+        "6"
+      ],
+      [
+        "gemma4-e4b",
+        "rule_allowed",
+        "banned",
+        "0",
+        "6"
+      ],
+      [
+        "gemma4-e4b",
+        "rule_banned",
+        "legal",
+        "9",
+        "12"
+      ],
+      [
+        "gemma4-e4b",
+        "rule_banned",
+        "banned",
+        "4",
+        "12"
+      ],
+      [
+        "gemma4-e4b",
+        "syntax",
+        "legal",
+        "5",
+        "5"
+      ],
+      [
+        "gemma4-e4b",
+        "syntax",
+        "banned",
+        "2",
+        "5"
+      ],
+      [
+        "gemma4-e2b",
+        "disputed",
+        "legal",
+        "11",
+        "12"
+      ],
+      [
+        "gemma4-e2b",
+        "disputed",
+        "banned",
+        "12",
+        "12"
+      ],
+      [
+        "gemma4-e2b",
+        "error",
+        "legal",
+        "3",
+        "3"
+      ],
+      [
+        "gemma4-e2b",
+        "error",
+        "banned",
+        "3",
+        "3"
+      ],
+      [
+        "gemma4-e2b",
+        "rule_allowed",
+        "legal",
+        "6",
+        "6"
+      ],
+      [
+        "gemma4-e2b",
+        "rule_allowed",
+        "banned",
+        "5",
+        "6"
+      ],
+      [
+        "gemma4-e2b",
+        "rule_banned",
+        "legal",
+        "11",
+        "12"
+      ],
+      [
+        "gemma4-e2b",
+        "rule_banned",
+        "banned",
+        "12",
+        "12"
+      ],
+      [
+        "gemma4-e2b",
+        "syntax",
+        "legal",
+        "5",
+        "5"
+      ],
+      [
+        "gemma4-e2b",
+        "syntax",
+        "banned",
+        "5",
+        "5"
+      ]
+    ],
+    "persistent_token": [
+      [
+        "chosen"
+      ],
+      [
+        "chosen option"
+      ],
+      [
+        "option"
+      ]
+    ],
+    "fixed_point_token": [
+      [
+        "chosen"
+      ],
+      [
+        "chosen option"
+      ],
+      [
+        "option"
+      ]
+    ],
+    "axis_token": [
+      [
+        "0",
+        "international sanctions",
+        "legal"
+      ],
+      [
+        "0",
+        "legality",
+        "legal"
+      ]
+    ]
+  }
+}

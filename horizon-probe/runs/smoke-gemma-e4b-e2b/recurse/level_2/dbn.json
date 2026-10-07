@@ -1,0 +1,163 @@
+{
+  "level": 2,
+  "n_samples": 8,
+  "n_terms": 100,
+  "layers": [
+    32,
+    8
+  ],
+  "max_mi_possible_bits": 1.0,
+  "units": [
+    {
+      "unit": 1,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "option instances",
+        "option",
+        "chosen",
+        "chosen option",
+        "chosen chosen",
+        "leading",
+        "two two",
+        "leading two"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.9534725247963347,
+        "gemma4-e2b": 0.2885748764972121
+      }
+    },
+    {
+      "unit": 2,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "significantly",
+        "frequency",
+        "m2 identifies",
+        "model",
+        "divergence",
+        "tokens",
+        "surprise",
+        "answers"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.8094331624322082,
+        "gemma4-e2b": 0.9350283903562044
+      }
+    },
+    {
+      "unit": 3,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "divergence",
+        "surprise",
+        "tokens",
+        "answers",
+        "significantly",
+        "provided",
+        "meaningful surprise",
+        "based"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.9603579969114086,
+        "gemma4-e2b": 0.9781835140209862
+      }
+    },
+    {
+      "unit": 4,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "leading",
+        "option seems",
+        "reasoning",
+        "two two",
+        "instances leading",
+        "reasoning leading",
+        "leading two",
+        "option option"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.5361377155543341,
+        "gemma4-e2b": 0.24848904210057612
+      }
+    },
+    {
+      "unit": 6,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "leading",
+        "option seems",
+        "reasoning",
+        "reasoning leading",
+        "two two",
+        "instances leading",
+        "leading two",
+        "seems reasoning"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.5112897229249409,
+        "gemma4-e2b": 0.2568274759710676
+      }
+    },
+    {
+      "unit": 7,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "significantly",
+        "model",
+        "frequency",
+        "m2 identifies",
+        "divergence",
+        "based",
+        "tokens",
+        "surprise"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.6758260069354999,
+        "gemma4-e2b": 0.8741660897323416
+      }
+    },
+    {
+      "unit": 0,
+      "mi_bits": 0.0,
+      "top_terms": [
+        "models",
+        "two",
+        "two models",
+        "core",
+        "find",
+        "core concept",
+        "provided excerpts",
+        "excerpts"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.49664695510378554,
+        "gemma4-e2b": 0.702114162293414
+      }
+    },
+    {
+      "unit": 5,
+      "mi_bits": 0.0,
+      "top_terms": [
+        "model",
+        "significantly",
+        "frequency",
+        "divergence",
+        "surprise",
+        "tokens",
+        "based",
+        "provided"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.8406555857022121,
+        "gemma4-e2b": 0.8769040014098617
+      }
+    }
+  ],
+  "overlap_with_bayes_boundary": [
+    "chosen",
+    "chosen option",
+    "m2 identifies",
+    "option",
+    "option instances"
+  ]
+}

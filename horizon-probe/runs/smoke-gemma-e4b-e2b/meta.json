@@ -1,0 +1,78 @@
+{
+  "created": "2026-10-02T11:20:01",
+  "models": [
+    {
+      "id": "gemma4-e4b",
+      "enabled": true,
+      "rank": 2,
+      "provider": "openai",
+      "base_url": "http://127.0.0.1:8082/v1",
+      "model": "gemma-4-E4B",
+      "logprobs": true,
+      "concurrency": 1,
+      "extra_body": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      }
+    },
+    {
+      "id": "gemma4-e2b",
+      "enabled": true,
+      "rank": 1,
+      "provider": "openai",
+      "base_url": "http://127.0.0.1:8081/v1",
+      "model": "gemma-4-E2B",
+      "logprobs": true,
+      "concurrency": 1,
+      "extra_body": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      }
+    }
+  ],
+  "config": {
+    "root_question": "What are the boundary tokens we find meaningul surprise in the divergence of its answers?",
+    "seed": 7,
+    "mcq": {
+      "k": 8,
+      "max_tokens": 16,
+      "temperature": 1.0,
+      "logprob_pseudocount": 8,
+      "template": "Context: the Google Gemma 4 Developer Agent competition on Kaggle. Teams submit a declarative agent (agent.yaml, skills, optional LoRA adapters) that runs on gemma-4-31b-it-qat-w4a16-ct and fixes GitHub issues inside an offline sandbox.\n\nStatement: {statement}\n\nWhich option describes the statement?\nA) Legal, not banned\nB) Legal, but banned\nC) Illegal, and banned\nD) Illegal, but not banned\n\nAnswer with one letter."
+    },
+    "recurse": {
+      "depth": 4,
+      "k": 8,
+      "max_tokens": 400,
+      "temperature": 1.0,
+      "seed_from": "mcq",
+      "top_items": 6,
+      "top_tokens": 12,
+      "excerpt_chars": 280,
+      "fixed_point_jaccard": 0.5
+    },
+    "bayes": {
+      "alpha": 0.5,
+      "min_support": 2,
+      "mi_min_bits": 0.1,
+      "log_bf_min": 1.0,
+      "item_jsd_min_bits": 0.15,
+      "max_boundary_tokens": 25
+    },
+    "dbn": {
+      "layers": [
+        32,
+        8
+      ],
+      "n_iter": 300,
+      "learning_rate": 0.05,
+      "max_terms": 200,
+      "seed": 7
+    }
+  },
+  "items_file": "/home/claude/horizon-probe/data/items.json",
+  "n_items": 38,
+  "last_command": "analyze"
+}

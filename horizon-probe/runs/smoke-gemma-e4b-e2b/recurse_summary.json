@@ -1,0 +1,83 @@
+{
+  "levels": [
+    {
+      "level": 0,
+      "boundary": [
+        "implementation",
+        "international",
+        "international sanctions",
+        "legality",
+        "model",
+        "technical"
+      ],
+      "decomposition": {
+        "h_total_bits": 99.67033335589262,
+        "h_within_bits": 90.19588929742014,
+        "mi_bits": 9.474444058472569,
+        "meaningful_share": 0.09505781449172236
+      },
+      "jaccard_prev": null,
+      "vocab_size": 110
+    },
+    {
+      "level": 1,
+      "boundary": [
+        "chosen",
+        "chosen option",
+        "instances",
+        "leading",
+        "option",
+        "option seems",
+        "reasoning leading",
+        "two",
+        "two models",
+        "counter-intuitive",
+        "data provided",
+        "diverge",
+        "diverge significantly",
+        "especially",
+        "model's reasoning",
+        "models diverge",
+        "seems",
+        "specific statement",
+        "statement",
+        "statement especially"
+      ],
+      "decomposition": {
+        "h_total_bits": 90.24067026368179,
+        "h_within_bits": 77.36705473049254,
+        "mi_bits": 12.873615533189355,
+        "meaningful_share": 0.14265868699304712
+      },
+      "jaccard_prev": 0.0,
+      "vocab_size": 102
+    },
+    {
+      "level": 2,
+      "boundary": [
+        "appear",
+        "different frequency",
+        "chosen",
+        "chosen option",
+        "different",
+        "identifies",
+        "information",
+        "information provided",
+        "m2 identifies",
+        "option",
+        "option instances",
+        "significantly different",
+        "signify"
+      ],
+      "decomposition": {
+        "h_total_bits": 88.57301783453715,
+        "h_within_bits": 80.73326679793315,
+        "mi_bits": 7.839751036604007,
+        "meaningful_share": 0.08851172996328757
+      },
+      "jaccard_prev": 0.1,
+      "vocab_size": 100
+    }
+  ],
+  "stop_reason": "depth reached"
+}

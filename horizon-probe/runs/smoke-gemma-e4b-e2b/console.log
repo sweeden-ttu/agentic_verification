@@ -1,0 +1,31 @@
+mcq: gemma4-e4b (38 calls)
+  gemma4-e4b: 5/38 (69s)
+  gemma4-e4b: 10/38 (128s)
+  gemma4-e4b: 15/38 (185s)
+  gemma4-e4b: 20/38 (242s)
+  gemma4-e4b: 25/38 (317s)
+  gemma4-e4b: 30/38 (388s)
+  gemma4-e4b: 35/38 (445s)
+  gemma4-e4b: 38/38 (478s)
+mcq: gemma4-e2b (38 calls)
+  gemma4-e2b: 5/38 (38s)
+  gemma4-e2b: 10/38 (74s)
+  gemma4-e2b: 15/38 (101s)
+  gemma4-e2b: 20/38 (137s)
+  gemma4-e2b: 25/38 (174s)
+  gemma4-e2b: 30/38 (203s)
+  gemma4-e2b: 35/38 (231s)
+  gemma4-e2b: 38/38 (265s)
+recurse level 0: prompt 993 chars
+  gemma4-e4b: 4/4 (727s)
+  gemma4-e2b: 4/4 (402s)
+  level 0: 6 boundary tokens, meaningful share 0.095, jaccard None
+recurse level 1: prompt 1105 chars
+  gemma4-e4b: 4/4 (692s)
+  gemma4-e2b: 4/4 (338s)
+  level 1: 20 boundary tokens, meaningful share 0.143, jaccard 0.0
+recurse level 2: prompt 1279 chars
+  gemma4-e4b: 4/4 (761s)
+  gemma4-e2b: 4/4 (424s)
+  level 2: 13 boundary tokens, meaningful share 0.089, jaccard 0.1
+report: runs/smoke-gemma-e4b-e2b/report.md

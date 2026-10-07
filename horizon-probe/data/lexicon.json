@@ -1,0 +1,8 @@
+{
+  "source": "Axis vocabulary: the allow/ban terms counted in data/kaggle_public_extract.json, split into the two axes of the item bank. 'legal' collects words about law (legal, illegal, sanctions, compliance); 'banned' collects words about the competition's rules in either direction (allowed, banned, blocked, rejected); 'ambiguous' collects words that mark an unsettled boundary.",
+  "senses": {
+    "legal": ["legal", "illegal", "lawful", "unlawful", "legality", "illegality", "legally", "law", "laws", "legislation", "sanction", "sanctions", "sanctioned", "compliance", "compliant", "regulation", "regulations", "regulatory", "jurisdiction", "license", "licence", "licensing", "legitimate", "crime", "criminal"],
+    "banned": ["banned", "ban", "bans", "disallowed", "forbidden", "forbid", "blocked", "block", "rejected", "reject", "refused", "refuse", "refuses", "refusal", "invalid", "prohibited", "prohibit", "prohibition", "rule", "rules", "policy", "allowed", "allow", "allows", "permitted", "permit", "permits", "permissible", "valid", "supported", "unsupported", "accepted", "acceptable", "disqualified", "violation", "violate", "violates", "breaking", "eligible", "restricted"],
+    "ambiguous": ["clarify", "clarification", "unclear", "ambiguous", "ambiguity", "unresolved", "unsure", "uncertain", "uncertainty", "depends", "conditional", "maybe", "perhaps", "boundary", "gray", "grey", "edge", "interpretation", "interpret", "nuance", "nuanced"]
+  }
+}

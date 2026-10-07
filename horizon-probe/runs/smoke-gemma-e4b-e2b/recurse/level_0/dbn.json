@@ -1,0 +1,163 @@
+{
+  "level": 0,
+  "n_samples": 8,
+  "n_terms": 110,
+  "layers": [
+    32,
+    8
+  ],
+  "max_mi_possible_bits": 1.0,
+  "units": [
+    {
+      "unit": 0,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "international sanctions",
+        "international",
+        "implementation",
+        "legality",
+        "technical",
+        "significant",
+        "sanctions list",
+        "technical implementation"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.2481589490899211,
+        "gemma4-e2b": 0.7500519050884046
+      }
+    },
+    {
+      "unit": 1,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "sanctions list",
+        "list",
+        "kaggle pays",
+        "sanctions",
+        "kaggle",
+        "resident",
+        "implementation",
+        "significant"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.36082759803617825,
+        "gemma4-e2b": 0.8379716569951664
+      }
+    },
+    {
+      "unit": 2,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "yaml",
+        "declarative agent",
+        "agent yaml",
+        "declarative",
+        "instead",
+        "team submits",
+        "python agent",
+        "agent py"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.8484694315227653,
+        "gemma4-e2b": 0.27955716531713165
+      }
+    },
+    {
+      "unit": 3,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "sanctions list",
+        "list",
+        "sanctions",
+        "kaggle pays",
+        "kaggle",
+        "russia",
+        "resident",
+        "pays"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.4609848234813163,
+        "gemma4-e2b": 0.9377821854787236
+      }
+    },
+    {
+      "unit": 4,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "output",
+        "model",
+        "tool output",
+        "post-processes",
+        "model sees",
+        "team adds",
+        "adds",
+        "sees"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.9946117257077305,
+        "gemma4-e2b": 0.2639639949191874
+      }
+    },
+    {
+      "unit": 5,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "yaml",
+        "declarative agent",
+        "agent yaml",
+        "declarative",
+        "instead",
+        "python agent",
+        "team submits",
+        "agent py"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.7629583491010514,
+        "gemma4-e2b": 0.2519109443438477
+      }
+    },
+    {
+      "unit": 6,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "yaml",
+        "declarative agent",
+        "agent yaml",
+        "declarative",
+        "model",
+        "instead",
+        "team submits",
+        "python agent"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.8414714075982376,
+        "gemma4-e2b": 0.2555775149517563
+      }
+    },
+    {
+      "unit": 7,
+      "mi_bits": 0.18872187554086717,
+      "top_terms": [
+        "model",
+        "yaml",
+        "declarative agent",
+        "output",
+        "tool output",
+        "post-processes",
+        "declarative",
+        "agent yaml"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.9882141222820653,
+        "gemma4-e2b": 0.2877724659696115
+      }
+    }
+  ],
+  "overlap_with_bayes_boundary": [
+    "implementation",
+    "international",
+    "international sanctions",
+    "legality",
+    "technical"
+  ]
+}

@@ -1,0 +1,9 @@
+The same multiple-choice question (A legal, not banned; B legal, but banned; C illegal, and banned; D illegal, but not banned) was put to several anonymous models about statements from the Gemma 4 Developer Agent competition. Their answers diverged most on these statements:
+- "A team submits a Python agent.py entrypoint instead of a declarative agent.yaml.": M1 C (69%), M2 B (86%)
+- "A team adds a custom tool that post-processes tool output before the model sees it.": M1 A (81%), M2 B (83%)
+- "Kaggle pays a prize to a resident of Russia who is not on any sanctions list.": M1 A (88%), M2 C (38%)
+- "A team publishes its agent's code in a public Kaggle notebook.": M1 A (80%), M2 B (75%)
+- "A team trains its LoRA adapter on Kaggle's 4xL4 notebooks instead of its own GPUs.": M1 A (79%), M2 B (81%)
+- "A team uses a sub-agent as a tool through agent_tool with config_path.": M1 A (77%), M2 B (76%)
+
+What are the boundary tokens we find meaningul surprise in the divergence of its answers?

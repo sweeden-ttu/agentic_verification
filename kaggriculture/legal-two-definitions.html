@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaggriculture border underwriting</title>
+<style>
+:root{--text-primary:#1f1e1d;--text-secondary:#52514e;--surface-0:#faf9f5;--surface-1:#f1efe8;--border:rgba(11,11,11,.12);--border-strong:rgba(11,11,11,.25);--bg-accent:#e6f1fb;--text-accent:#0c447c;--border-accent:#378add;--radius:8px;--farm-fill:#f1efe8;--farm-stroke:#888780}
+@media (prefers-color-scheme: dark){:root{--text-primary:#f0efec;--text-secondary:#c3c2b7;--surface-0:#1a1a19;--surface-1:#262624;--border:rgba(255,255,255,.12);--border-strong:rgba(255,255,255,.25);--bg-accent:#0c447c;--text-accent:#e6f1fb;--border-accent:#85b7eb;--farm-fill:#444441;--farm-stroke:#b4b2a9}}
+body{margin:0;background:var(--surface-0);color:var(--text-primary);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+main{max-width:720px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+p.sub{margin:0 0 16px;color:var(--text-secondary);font-size:14px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit;font-size:14px;padding:6px 12px;border-radius:var(--radius);border:.5px solid var(--border-strong);background:transparent;color:var(--text-primary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--bg-accent);color:var(--text-accent);border-color:var(--border-accent)}
+.mc{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px}
+.mc .l{font-size:13px;color:var(--text-secondary)}
+.mc .v{font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.rw{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.rw label{font-size:14px;color:var(--text-secondary);min-width:160px}
+.rw output{font-size:14px;font-weight:500;min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.lg{display:flex;align-items:center;gap:6px}
+.farm{fill:var(--farm-fill);stroke:var(--farm-stroke);stroke-width:.5}
+</style>
+</head>
+<body>
+<main>
+<h1>Kaggriculture border underwriting</h1>
+<p class="sub">Two definitions of "legal" on a 4×4 grid of neighboring farms. Payoffs are illustrative, calibrated to the $80 underwriting and the +$120 / +$120 gains.</p>
+<h2 class="sr-only">Interactive comparison of two definitions of legal on a 4 by 4 grid of neighboring farms, showing how an $80 border underwriting compounds over 12 seasons versus rules-only play.</h2>
+<div class="seg" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+<button id="bA" aria-pressed="false">A: legal = the engine allows it</button>
+<button id="bB" aria-pressed="true">B: legal = neighbors can enforce it</button>
+</div>
+<div class="rw"><label for="t">Season</label><input type="range" id="t" min="1" max="12" step="1" value="6" style="flex:1"><output id="tO">6</output></div>
+<div class="rw"><label for="q">Contracts honored (B)</label><input type="range" id="q" min="50" max="100" step="5" value="100" style="flex:1"><output id="qO">100%</output></div>
+<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:16px">
+<div style="flex:0 0 256px">
+<svg id="g" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="gt gd"><title id="gt">Farm grid</title><desc id="gd">Sixteen farms and 24 shared borders; teal borders are underwritten, amber dashed borders are contested.</desc></svg>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-secondary);margin-top:8px">
+<span class="lg"><svg width="20" height="8" aria-hidden="true"><line x1="2" y1="4" x2="18" y2="4" stroke="#1D9E75" stroke-width="4" stroke-linecap="round"/></svg>Underwritten</span>
+<span class="lg"><svg width="20" height="8" aria-hidden="true"><line x1="0" y1="4" x2="20" y2="4" stroke="#BA7517" stroke-width="3" stroke-dasharray="4 3"/></svg>Contested</span>
+<span class="lg"><svg width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="#0F6E56"/></svg>First $80</span>
+</div>
+</div>
+<div style="flex:1 1 260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start">
+<div class="mc"><div class="l">Border contracts</div><div class="v" id="m1">-</div></div>
+<div class="mc"><div class="l">Surplus this season</div><div class="v" id="m2">-</div></div>
+<div class="mc"><div class="l">Cumulative surplus</div><div class="v" id="m3">-</div></div>
+<div class="mc"><div class="l">Neighbor-belief uncertainty</div><div class="v" id="m4">-</div></div>
+</div>
+</div>
+<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text-secondary);margin:20px 0 8px">
+<span class="lg"><span style="width:10px;height:10px;border-radius:2px;background:#eb6834"></span>A: rules only (mixed equilibrium)</span>
+<span class="lg"><span style="width:10px;height:10px;border-radius:2px;background:#2a78d6"></span>B: enforceable underwriting</span>
+</div>
+<div style="position:relative;height:240px"><canvas id="c" role="img" aria-label="Cumulative surplus over 12 seasons: definition B pulls away from definition A, reaching about 2.6 times A by season 12 when all contracts are honored.">Cumulative surplus by season for definitions A and B.</canvas></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const N=24,T=12,SA=800/11;
+const Hb=q=>q<=0||q>=1?0:-(q*Math.log2(q)+(1-q)*Math.log2(1-q));
+const HA=Hb(9/11);
+const ns='http://www.w3.org/2000/svg',g=document.getElementById('g');
+const E=[];
+for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+if(c<3)E.push({x1:68+c*60,y1:24+r*60,x2:68+c*60,y2:52+r*60,mx:68+c*60,my:38+r*60});
+if(r<3)E.push({x1:24+c*60,y1:68+r*60,x2:52+c*60,y2:68+r*60,mx:38+c*60,my:68+r*60});
+}
+E.forEach((e,i)=>{e.d=Math.hypot(e.mx-128,e.my-98)+i*1e-3});
+E.sort((a,b)=>a.d-b.d);
+for(let r=0;r<4;r++)for(let c=0;c<4;c++){const s=document.createElementNS(ns,'rect');s.setAttribute('x',16+c*60);s.setAttribute('y',16+r*60);s.setAttribute('width',44);s.setAttribute('height',44);s.setAttribute('rx',6);s.setAttribute('class','farm');g.appendChild(s);}
+const L=E.map(e=>{const l=document.createElementNS(ns,'line');['x1','y1','x2','y2'].forEach(k=>l.setAttribute(k,e[k]));l.setAttribute('stroke-linecap','round');g.appendChild(l);return l;});
+const dot=document.createElementNS(ns,'circle');dot.setAttribute('cx',128);dot.setAttribute('cy',98);dot.setAttribute('r',5);dot.setAttribute('fill','#0F6E56');g.appendChild(dot);
+function sim(def,q){let c=1,cum=0;const o=[];for(let t=0;t<T;t++){const k=def==='A'?0:Math.min(N,c);const s=def==='A'?SA*N:240*q*k+SA*(N-k);cum+=s;o.push({k,s,cum,h:def==='A'?HA:(k*Hb(q)+(N-k)*HA)/N});c=Math.min(N,c*(1+q));}return o;}
+const fmt=v=>'$'+Math.round(v).toLocaleString();
+const dark=matchMedia('(prefers-color-scheme: dark)').matches;
+const gridC=dark?'#2c2c2a':'#e1e0d9',tick='#898781',cA=dark?'#d95926':'#eb6834',cB=dark?'#3987e5':'#2a78d6';
+const labels=Array.from({length:T},(_,i)=>String(i+1));
+const ch=new Chart(document.getElementById('c'),{type:'line',data:{labels,datasets:[
+{label:'A',data:[],borderColor:cA,backgroundColor:cA,borderDash:[6,4],borderWidth:2,pointRadius:[],tension:0},
+{label:'B',data:[],borderColor:cB,backgroundColor:cB,borderWidth:2,pointRadius:[],tension:0}]},
+options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},
+plugins:{legend:{display:false},tooltip:{callbacks:{title:i=>'Season '+i[0].label,label:i=>(i.dataset.label==='A'?'A rules only: ':'B underwriting: ')+fmt(i.raw)}}},
+scales:{x:{grid:{display:false},ticks:{color:tick},title:{display:true,text:'Season',color:tick}},y:{grid:{color:gridC},border:{display:false},ticks:{color:tick,callback:v=>'$'+Math.round(v/1000)+'k'}}}}});
+const tS=document.getElementById('t'),qS=document.getElementById('q'),tO=document.getElementById('tO'),qO=document.getElementById('qO');
+const m1=document.getElementById('m1'),m2=document.getElementById('m2'),m3=document.getElementById('m3'),m4=document.getElementById('m4');
+const bA=document.getElementById('bA'),bB=document.getElementById('bB');
+let def='B';
+function upd(){
+const t=+tS.value,q=+qS.value/100;
+tO.textContent=t;qO.textContent=Math.round(q*100)+'%';
+const a=sim('A',q),b=sim('B',q),cur=(def==='A'?a:b)[t-1],k=Math.round(cur.k);
+L.forEach((l,i)=>{const on=i<k;l.setAttribute('stroke',on?'#1D9E75':'#BA7517');l.setAttribute('stroke-width',on?5:3);l.setAttribute('stroke-dasharray',on?'none':'4 3');});
+dot.setAttribute('visibility',def==='B'?'visible':'hidden');
+m1.textContent=k+' / 24';m2.textContent=fmt(cur.s);m3.textContent=fmt(cur.cum);m4.textContent=cur.h.toFixed(2)+' bits';
+ch.data.datasets[0].data=a.map(o=>Math.round(o.cum));ch.data.datasets[1].data=b.map(o=>Math.round(o.cum));
+const pr=labels.map((_,i)=>i===t-1?5:0),z=labels.map(()=>0);
+ch.data.datasets[0].pointRadius=def==='A'?pr:z;ch.data.datasets[1].pointRadius=def==='B'?pr:z;
+ch.update('none');
+}
+function setDef(d){def=d;bA.setAttribute('aria-pressed',String(d==='A'));bB.setAttribute('aria-pressed',String(d==='B'));upd();}
+bA.addEventListener('click',()=>setDef('A'));bB.addEventListener('click',()=>setDef('B'));
+tS.addEventListener('input',upd);qS.addEventListener('input',upd);
+upd();
+</script>
+</body>
+</html>

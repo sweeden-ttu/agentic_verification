@@ -1,0 +1,166 @@
+{
+  "level": 1,
+  "n_samples": 8,
+  "n_terms": 102,
+  "layers": [
+    32,
+    8
+  ],
+  "max_mi_possible_bits": 1.0,
+  "units": [
+    {
+      "unit": 0,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "two models",
+        "option seems",
+        "option",
+        "two",
+        "leading",
+        "instances",
+        "chosen option",
+        "chosen"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.089525222091629,
+        "gemma4-e2b": 0.9964043185778333
+      }
+    },
+    {
+      "unit": 1,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "model",
+        "implementation",
+        "based",
+        "provided",
+        "token",
+        "technical",
+        "discussing",
+        "model m2"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.9976690487002432,
+        "gemma4-e2b": 0.05079678009243629
+      }
+    },
+    {
+      "unit": 2,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "diverge significantly",
+        "counter-intuitive",
+        "seems",
+        "specific statement",
+        "statement",
+        "model's reasoning",
+        "models diverge",
+        "diverge"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.26850950895788056,
+        "gemma4-e2b": 0.9968379361824076
+      }
+    },
+    {
+      "unit": 3,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "diverge significantly",
+        "counter-intuitive",
+        "seems",
+        "specific statement",
+        "statement",
+        "model's reasoning",
+        "models diverge",
+        "diverge"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.33388910674045763,
+        "gemma4-e2b": 0.9913832875016932
+      }
+    },
+    {
+      "unit": 4,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "two models",
+        "option seems",
+        "option",
+        "two",
+        "leading",
+        "instances",
+        "chosen option",
+        "chosen"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.08610828881027716,
+        "gemma4-e2b": 0.9961534091500887
+      }
+    },
+    {
+      "unit": 5,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "diverge significantly",
+        "two models",
+        "counter-intuitive",
+        "option seems",
+        "seems",
+        "two",
+        "specific statement",
+        "option"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.22781201204805152,
+        "gemma4-e2b": 0.9990299034525979
+      }
+    },
+    {
+      "unit": 6,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "option seems",
+        "two models",
+        "option",
+        "two",
+        "leading",
+        "instances",
+        "chosen option",
+        "chosen"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.04398866683745446,
+        "gemma4-e2b": 0.995456146581426
+      }
+    },
+    {
+      "unit": 7,
+      "mi_bits": 1.0,
+      "top_terms": [
+        "diverge significantly",
+        "counter-intuitive",
+        "seems",
+        "specific statement",
+        "statement",
+        "model's reasoning",
+        "models diverge",
+        "diverge"
+      ],
+      "mean_activation": {
+        "gemma4-e4b": 0.24652152653452808,
+        "gemma4-e2b": 0.9986983577892186
+      }
+    }
+  ],
+  "overlap_with_bayes_boundary": [
+    "chosen",
+    "chosen option",
+    "instances",
+    "leading",
+    "option",
+    "option seems",
+    "two",
+    "two models"
+  ]
+}

@@ -1,0 +1,2288 @@
+{
+  "tools": [
+    {
+      "name": "run_command",
+      "signature_or_args": "run_command(command: str) -> str",
+      "notes": "bash in /workspace; \"only the first 5,000 characters of output are returned\" (stdout and stderr truncated to max_stdout_chars=5,000); single-command timeout 300 s default, set by eval_config timeout_seconds; effective timeout = min(timeout_seconds, max(5, remaining seconds)); counts toward tool budget; pytest/unittest \"are not masked\"",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; topic_744577.txt"
+    },
+    {
+      "name": "read_file",
+      "signature_or_args": "read_file(filepath: str, start_line: int | None = None, end_line: int | None = None) -> str",
+      "notes": "\"max 150 lines / 10,000 chars per call\" (\"Dual Truncation Cap ... 150 lines (max_file_lines) AND 10,000 characters (max_file_chars)\"); counts toward budget; line-range calls failed with \"'>' not supported between instances of 'int' and 'str'\" until a wheelhouse fix; workspace-only (invalid /tmp uses reported)",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; topic_744678.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "name": "edit_file",
+      "signature_or_args": "edit_file(filepath: str, old_string: str, new_string: str, allow_multiple: bool = False) -> str",
+      "notes": "\"string replacement with whitespace-tolerant matching\"; \"edit_file requires old_string to match the file byte for byte\"; returns FileEditError \"Failed to replace: old_string not found.\" on mismatch; 09-30 wheelhouse \"edit_file gained a fallback that retries the match with es[capes]\"; counts toward budget",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; topic_744272.txt; topic_745003.txt"
+    },
+    {
+      "name": "write_file",
+      "signature_or_args": "write_file(filepath: str, content: str) -> str",
+      "notes": "\"creates/overwrites a file under /workspace\"; \"The write_file tool accepts only repository paths, so never use it for /tmp\"; counts toward budget",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "name": "get_status",
+      "signature_or_args": "get_status() -> str",
+      "notes": "\"remaining time and calls\"; free (not counted toward tool budget)",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "name": "submit_patch",
+      "signature_or_args": "submit_patch() -> str",
+      "notes": "\"stores `git diff` of `/workspace` — call it last\"; \"`git add -N . && git diff HEAD`; free and ends the loop next turn\"; not counted toward tool budget; anything left in /workspace enters the diff",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "name": "get_code_neighbors",
+      "signature_or_args": "get_code_neighbors(node: str, edge_type: str | None = None, max_neighbors: int = 50) -> str",
+      "notes": "graph tool; \"returns node names only, without code\"; \"`edge_type=\\\"CALLS\\\"` returns nothing\"; graph holds only lowercase `calls` edges (452,588 of 452,588) and no async def nodes (0 of 68,449)",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; topic_744577.txt; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "name": "search_similar_code",
+      "signature_or_args": "search_similar_code(query: str, k: int = 10) -> str",
+      "notes": "\"only accepts an existing node name\"; \"returns the full source of each of its k (default 10) nodes with no limit\" (FastAPI nodes up to ~130,000 chars -> ContextWindowExceededError); host: \"I will limit to max_stdout_chars like other tools\"; embeddings \"appear near-collapsed\" (mean random-pair cosine 0.78-0.90)",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; topic_744040.txt; topic_744577.txt; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "name": "get_code_subgraph",
+      "signature_or_args": "get_code_subgraph(nodes: list[str]) -> str",
+      "notes": "graph tool; induced subgraph over named nodes; graph tools present \"when the repo ships graph/embeddings\"; harness adds a \"Code Intelligence Tools\" prompt block only if graph and embedding files > 100 bytes exist",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "name": "agent_tool",
+      "signature_or_args": "tools: - agent_tool: {config_path: sub_agents/<name>.yaml, skip_summarization: true|false}",
+      "notes": "wraps a sub-agent YAML as a tool (AgentTool); used for read-only analyzer/reviewer sub-agents; all sub-agents must declare the same base model",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-and-the-shape-of-doubt.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "name": "run_skill_script",
+      "signature_or_args": "run_skill_script(skill_name=\"repo-lens\", file_path=\"scripts/repo_lens.py\", args=[...])",
+      "notes": "ADK skill tool; \"Skills (`skills/<name>/SKILL.md` + `scripts/`) let your agent run your own Python inside the sandbox via `run_skill_script`\"; \"The code-executor form of Google ADK accepts `args` as a list of strings, or an object whose keys become long options\"",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "name": "swegemma.graph (offline helpers)",
+      "signature_or_args": "sg.get_graph(repo_name, graph_dir, embeddings_dir, base_commit); sg.get_neighbor(node, graph, max_neighbors); sg.get_similar_nodes(node, repo_name, k, graph, graph_dir, embeddings_dir, base_commit); sg.get_induced_subgraph(graph, nodes)",
+      "notes": "library functions behind the three graph tools, used in the official starter notebook (not agent tools)",
+      "source": "getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "name": "validate_single_declared_model",
+      "signature_or_args": "swegemma.models.discovery.validate_single_declared_model(submission_dir) -> model name",
+      "notes": "checks exactly one base model is declared; \"These are the same functions the scorer calls\"",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "name": "validate_directory",
+      "signature_or_args": "adk_submission.validate_directory(dir[, limits])",
+      "notes": "structural validation of the bundle (extensions, size, includes)",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "name": "compile_submission",
+      "signature_or_args": "adk_submission.compile_submission(submission_dir, tool_registry, model_registry, limits=..., generation_constraints=...)",
+      "notes": "sandboxed YAML compiler against closed registries (ToolRegistry, ModelRegistry, SkillRegistry, CallbackRegistry); \"the official compiler correctly rejected\" a bundle containing a bytecode cache",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-and-the-shape-of-doubt.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "name": "build_submission_limits",
+      "signature_or_args": "swegemma.config.build_submission_limits() -> (limits, generation_constraints)",
+      "notes": "returns SubmissionLimits / GenerationConstraints used by validate_directory and compile_submission",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "name": "discover_adapters",
+      "signature_or_args": "adk_submission.discover_adapters(str(AGENT_DIR), adapter_extensions=ALLOWED_ADAPTER_EXTENSIONS)",
+      "notes": "discovers PEFT LoRA adapters; host: \"discover_adapters expects the submission root\"",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; topic_743508.txt"
+    },
+    {
+      "name": "VllmConfig / VllmServer",
+      "signature_or_args": "VllmConfig(model, port=8000, tool_call_parser='gemma4', reasoning_parser='gemma4', max_model_len=32768, gpu_memory_utilization=0.90, enable_auto_tool_choice=True, enable_lora=True, max_loras=8, max_lora_rank=128, tensor_parallel_size=4, startup_timeout=1200); VllmServer(cfg, adapter_manifest=adapters).create_model_registry(aliases=[...], model_prefix='openai/', api_key='EMPTY')",
+      "notes": "starter serving config; scorer per HARNESS_README uses gpu_memory_utilization 0.80 and default_chat_template_kwargs {\"enable_thinking\": True}; build_cmd() passes --max-loras max(8, n adapters) and --max-lora-rank 128 (later made dynamic)",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; topic_744331.txt; topic_744794.txt"
+    },
+    {
+      "name": "Evaluator / EvalConfig",
+      "signature_or_args": "EvalConfig(tasks_path, snapshots_dir, results_dir, submission_dir, models, sandbox='subprocess', timeout_seconds, max_time_minutes, max_tool_calls, max_turns, limits, generation_constraints, adapter_manifest, context_cache_config, events_compaction_config, graph_dir, embeddings_dir, wheels_dir); Evaluator(cfg).evaluate_task(task=, task_index=, total_tasks=)",
+      "notes": "local Phase 1 (agent) + Phase 2 (verification); result fields resolved, test_exit_code, agent_patch, tool_calls, duration_seconds; Docker is not available in Kaggle notebooks so local runs use sandbox=subprocess",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; eval-errors-gemma-4-developer-agent.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "name": "swegemma eval (CLI)",
+      "signature_or_args": "swegemma eval --tasks … --submission-dir starter_kit/sample_submission --sandbox docker",
+      "notes": "documented in HARNESS_README section 9; packages later published as the \"Gemma 4 Developer Agent Wheelhouse\"",
+      "source": "topic_742882.txt"
+    },
+    {
+      "name": "kaggle competitions submit (CLI)",
+      "signature_or_args": "kaggle competitions submit gemma-4-developer-agent -k <you>/<notebook> -v <version> -f submission.zip -m \"msg\"",
+      "notes": "CLI alternative to the notebook Submit button",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "text": "\"You may submit a maximum of one (1) Submission per day.\" (Rules 2.2a, quoted)",
+      "kind": "limit",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "R2",
+      "text": "\"You may select up to two (2) Final Submissions for judging.\" (Rules 2.2b, quoted)",
+      "kind": "limit",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "R3",
+      "text": "\"Your agent has a limit of 12 hours to submit patches for all tasks, inclusive of sandbox setup time, but excluding time for patch validation.\" (Evaluation page, quoted)",
+      "kind": "limit",
+      "source": "gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "R4",
+      "text": "\"Your submission's overall score is the percentage of patched repositories that pass the validation tests.\" (Evaluation page, quoted)",
+      "kind": "scoring",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "R5",
+      "text": "\"There are about 120 tasks in the test set, evenly divided between the public and private splits. The test set was curated from a set of private repositories.\" (Data page, quoted); host: \"There are ~120 tasks in the test set, or about 60 in each of the public and private splits. They are scored during the same 12-hour run.\"",
+      "kind": "scoring",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; topic_744258.txt"
+    },
+    {
+      "id": "R6",
+      "text": "Host: \"No, the test set draws from private repositories not available publicly.\" (public training repos are fastapi, rich, requests, httpx)",
+      "kind": "scoring",
+      "source": "topic_744951.txt"
+    },
+    {
+      "id": "R7",
+      "text": "Base model is fixed: \"model: gemma-4-31b-it-qat-w4a16-ct        # the only allowed model\"; rules \"require gemma-4-31b-it-qat-w4a16-ct for every agent and subagent\"; \"All agents must declare the same base model.\"",
+      "kind": "banned",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-and-the-shape-of-doubt.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R8",
+      "text": "LoRA adapters allowed: \"The rules explicitly permit PEFT LoRA adapters on gemma-4-31b-it-qat-w4a16-ct\"; \"Optional LoRA adapters are permitted\"",
+      "kind": "allowed",
+      "source": "topic_744070.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "R9",
+      "text": "Skills allowed: \"Each skill is a folder under skills/ containing a SKILL.md.\" (citing the evaluation page); \"the harness allows up to 1,000 skills, 50 MiB each, within the 3 GiB limit\"",
+      "kind": "allowed",
+      "source": "topic_744133.txt"
+    },
+    {
+      "id": "R10",
+      "text": "\"private sharing of competition code or data outside of your team is, as always, not permitted. Code sharing must always be done publicly through the Kaggle forums/notebooks.\"",
+      "kind": "banned",
+      "source": "topic_742815.txt"
+    },
+    {
+      "id": "R11",
+      "text": "\"The rules say publicly shared Competition Code must be shared on this competition's forum or notebooks.\"; \"the rules ask that publicly shared competition code also be shared on this forum\"",
+      "kind": "format",
+      "source": "topic_744941.txt; topic_745143.txt"
+    },
+    {
+      "id": "R12",
+      "text": "\"Kids under 13 years of age are not allowed to participate on Kaggle.\"; participants under 18 must submit two Parent/Guardian consent forms",
+      "kind": "banned",
+      "source": "topic_742815.txt"
+    },
+    {
+      "id": "R13",
+      "text": "Discord: \"Discord channels for specific competitions are considered 'public' spaces where you are allowed to talk about competition details\"; staff do not monitor Discord",
+      "kind": "allowed",
+      "source": "topic_742815.txt"
+    },
+    {
+      "id": "R14",
+      "text": "External/proprietary models for synthetic data (host, truncated): \"As long as you are using those models in accordance with their model license terms, and the output you're using to submit to that competitio...\"",
+      "kind": "allowed",
+      "source": "topic_742807.txt"
+    },
+    {
+      "id": "R15",
+      "text": "Declarative only: \"Submissions are **declarative YAML only** (`agent.yaml`), compiled in a sandbox against closed registries. No `agent.py`.\"; \"`adk-submission` replaces standard ADK's `from_config()` (arbitrary Python imports) with a **sandboxed YAML compiler**\"; \"`adk-submission` states it never imports competitor Python\"",
+      "kind": "banned",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "R16",
+      "text": "\"`generate_content_config` accepts sampling + `thinking_config`, but `tools`, `system_instruction`, `http_options`, `safety_settings`, `response_schema` are rejected inside it by design\"",
+      "kind": "banned",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R17",
+      "text": "\"`!include` resolves `.md`/`.txt` as raw strings and `.yaml` recursively; `..` traversal, symlinks and absolute paths are blocked.\"",
+      "kind": "banned",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R18",
+      "text": "Allowed submission file extensions (ALLOWED_SUBMISSION_EXTENSIONS as mirrored by participants): {\".yaml\", \".yml\", \".md\", \".txt\", \".py\", \".json\", \".safetensors\"}; adapter extensions {\".safetensors\"}; \"Disallowed file extension\" otherwise",
+      "kind": "format",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-and-the-shape-of-doubt.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "R19",
+      "text": "Bundle size: \"Archive exceeds 3 GiB limit\" (MAX_SUBMISSION_SIZE_BYTES); \"total unpacked < 3 GiB (adapters included)\"",
+      "kind": "limit",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R20",
+      "text": "SubmissionLimits passed to the compiler by a participant: max_total_size_bytes=3 GiB, max_yaml_size_bytes=50 MiB, max_skill_size_bytes=50 MiB, max_file_count=10000, max_yaml_files=1000, max_instruction_chars=1,000,000, max_total_instruction_chars=10,000,000, max_agents=500, max_sub_agent_depth=50, max_skills=1000, max_loop_iterations=500; GenerationConstraints max_output_tokens 1..32768, thinking_budget 0..32768",
+      "kind": "limit",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "R21",
+      "text": "Context: \"`max_model_len = 32768` (`32,768` tokens maximum combined prompt + reasoning + output context length)\" (HARNESS_README, quoted); vLLM refuses any call where prompt + max_output_tokens > 32,768",
+      "kind": "limit",
+      "source": "gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; topic_744692.txt"
+    },
+    {
+      "id": "R22",
+      "text": "\"`max_output_tokens` | `1` to `32,768` (default `16,384`; bounded by 4x L4 vLLM `max_model_len=32768`)\" (HARNESS_README, quoted); thinking_budget \"1–32,768 (dflt 4,096)\"; \"`thinking_level: NONE` to disable\"",
+      "kind": "limit",
+      "source": "gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R23",
+      "text": "Scoring hardware: 4x NVIDIA L4, tensor_parallel_size=4, max_model_len=32768; HARNESS_README: \"`gpu_memory_utilization = 0.80`\", \"`default_chat_template_kwargs = {\\\"enable_thinking\\\": True}`\"",
+      "kind": "limit",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "R24",
+      "text": "eval_config.yaml: host: \"The scorer reads those, and only those, four fields. The default is no limit.\" (timeout_seconds, max_tool_calls, max_time_minutes, max_turns)",
+      "kind": "limit",
+      "source": "topic_743063.txt"
+    },
+    {
+      "id": "R25",
+      "text": "Harness defaults (from swegemma 0.2.7 reading): timeout_seconds 300, max_tool_calls None, max_time_minutes 60.0, max_turns 500; quick-reference: \"Wall-clock / task | 60 min\", \"Max turns / task | 500\", \"Single command timeout | 300 s\"",
+      "kind": "limit",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "R26",
+      "text": "Output truncation: \"Both `stdout` and `stderr` are truncated to `max_stdout_chars` (**`5,000` characters** default)\"; read_file \"Dual Truncation Cap: Output is capped at 150 lines (max_file_lines) AND 10,000 characters (max_file_chars)\" (HARNESS_README, quoted)",
+      "kind": "limit",
+      "source": "gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "R27",
+      "text": "Tool budget: \"`submit_patch` and `get_status` are not counted\"; \"The 11th budget-gated call returns `BudgetExceeded`\" (max_tool_calls 10); low-budget warning only when max_tool_calls >= 20",
+      "kind": "limit",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "R28",
+      "text": "Hidden tasks run \"Sequentially.\"; \"Parallel: I we don't support parallel calls.\"",
+      "kind": "limit",
+      "source": "topic_743063.txt; topic_743964.txt"
+    },
+    {
+      "id": "R29",
+      "text": "12-hour overrun: \"Currently, hitting the 12-hour limit will error, but I'm planning on a fix that will score unfinished t[asks as 0]\"; later \"12h overrun: Not yet. Budget per task using eval_config.yaml.\"",
+      "kind": "scoring",
+      "source": "topic_743063.txt; topic_743964.txt"
+    },
+    {
+      "id": "R30",
+      "text": "Resolution rule (README §8.2): \"resolved if and only if pytest exits with return code 0\"; code (swegemma 0.2.7) additionally requires a parseable JUnit XML with >=1 pass, 0 failures, 0 errors, every test added by test_patch passed (a skipped parametrisation fails the task), and a summary not reading as zero passes; README re-issued 2026-09-25 adds \"every required test node passed explicitly, and a skip does not count as a pass\"",
+      "kind": "scoring",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "R31",
+      "text": "\"a task with no result counts as unresolved\"; tasks with no patch, or whose agent/test patch did not apply, are unresolved",
+      "kind": "scoring",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "R32",
+      "text": "Test/config tampering: verify_task \"should reset agent-modified test/config files before applying test_patch (HARNESS_README, \\\"Anti-Tampering Test & Config Reset\\\")\"; \"Modify or create test files, conftest.py or pytest.ini (they are reset before grading)\"",
+      "kind": "banned",
+      "source": "topic_744825.txt; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "R33",
+      "text": "Sandbox: \"sandbox A (offline, 2 vCPU, 4 GB)\"; graders run \"Docker `swebench-sandbox:latest`, linux/amd64, `network_mode=none`, 4 GiB, 2 vCPU\"; \"The grader sandbox is air-gapped.\"",
+      "kind": "limit",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "R34",
+      "text": "Compaction (HARNESS_README since Sep 25 update): \"compaction_interval = 5\", \"token_threshold = 14,336\"; earlier §7.2 listed 32,768; starter notebook uses compaction_interval=15, token_threshold=14336",
+      "kind": "format",
+      "source": "topic_744692.txt; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "R35",
+      "text": "Host: \"Your notebook needs to generate a submission file (submission.zip) before that submission can be scored.\"",
+      "kind": "format",
+      "source": "topic_743683.txt"
+    },
+    {
+      "id": "R36",
+      "text": "\"The archive must have `agent.yaml` **at its root** (not inside a folder).\"",
+      "kind": "format",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "R37",
+      "text": "Chat template fixed: \"Submissions can't change the template: the harness starts vLLM without --chat-template and the generation config has no template field.\"",
+      "kind": "banned",
+      "source": "topic_744844.txt"
+    },
+    {
+      "id": "R38",
+      "text": "Tool layer fixed: \"submissions have no way to touch this layer (no custom tools, no pre- or post-processing of tool output)\"",
+      "kind": "banned",
+      "source": "topic_744272.txt"
+    },
+    {
+      "id": "R39",
+      "text": "GPU quota: \"30 hours/week is the quota\"; L4x4 time charged double (\"10 hours were deducted\" for 5 h run; \"L4 bills 2.00x wall clock against a 30 h weekly pool\"); batch GPU sessions limit \"Maximum batch GPU session count of 2 reached\"",
+      "kind": "limit",
+      "source": "topic_744256.txt; topic_743683.txt; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-4-dev-agent-task-anatomy-survival-kit.ipynb"
+    },
+    {
+      "id": "R40",
+      "text": "Leaderboard: public board is 50% of test set; scores truncated to 2 decimals; public split inferred as 58 tasks (one task = 0.0172); \"within a tie, rank is submission time\"",
+      "kind": "scoring",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "R41",
+      "text": "Timeline: \"September 23, 2026 - Start Date. ... December 2, 2026 - Final Submission Deadline.\"; paper-track Writeup \"public after 12 November\"",
+      "kind": "limit",
+      "source": "gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb; topic_744941.txt; topic_744354.txt"
+    },
+    {
+      "id": "R42",
+      "text": "Sampling: \"Ensure sampling.yaml omits thinking_level (mapped to OpenAI reasoning_effort by LiteLLM)\"",
+      "kind": "format",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "R43",
+      "text": "LoRA serving: build_cmd() \"passes --max-loras max(8, number of adapters) and --max-lora-rank 128, so a submission cannot lower them\"; host later: \"Now vLLM will set its LoRA params dynamically based on what you actually submit.\"",
+      "kind": "limit",
+      "source": "topic_744331.txt; topic_744794.txt"
+    }
+  ],
+  "syntax": [
+    {
+      "id": "S1",
+      "artifact": "agent.yaml",
+      "rule": "Root agent fields (LlmAgent default agent_class): name, model, description, instruction (supports {problem_description} / {hints} templating), tools, skills, sub_agents, generate_content_config",
+      "example": "name: swe_coder\nmodel: gemma-4-31b-it-qat-w4a16-ct\ninstruction: !include prompts/system.md\ngenerate_content_config: !include configs/sampling.yaml\ntools:\n  - run_command\n  - submit_patch",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "S2",
+      "artifact": "agent.yaml",
+      "rule": "Exactly one root config: \"agent.yaml # REQUIRED root (agent.yml / root_agent.yaml also accepted)\"; validators require exactly one of agent.yaml/agent.yml/root_agent.yaml/root_agent.yml",
+      "example": "ROOTS = [\"agent.yaml\", \"agent.yml\", \"root_agent.yaml\", \"root_agent.yml\"]",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "S3",
+      "artifact": "agent.yaml",
+      "rule": "!include: .md/.txt included as raw strings, .yaml recursively; path relative to the including file; \"..\", symlinks, absolute paths blocked (participant checker asserts no \"..\" part)",
+      "example": "instruction: !include analyzer.md   (inside sub_agents/code_analyzer.yaml)",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "S4",
+      "artifact": "agent.yaml",
+      "rule": "Optional template variable: \"`{problem_description?}` is filled in by the harness with the issue text (the `?` makes it optional so validation never fails on it)\"",
+      "example": "## The issue\n{problem_description?}",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "S5",
+      "artifact": "agent.yaml",
+      "rule": "Sub-agent as tool via agent_tool with config_path and skip_summarization",
+      "example": "  - agent_tool:\n      config_path: sub_agents/code_analyzer.yaml\n      skip_summarization: true",
+      "source": "gemma4-baseline-agent-v2-compile-fixed.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "S6",
+      "artifact": "agent.yaml",
+      "rule": "Sub-agent YAML may inline generate_content_config instead of !include, and must declare the same model",
+      "example": "generate_content_config:\n  temperature: 0.2\n  thinking_config:\n    thinking_budget: 4096\n    include_thoughts: false",
+      "source": "gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "S7",
+      "artifact": "agent.yaml",
+      "rule": "include_contents key accepted by the compiler; skills listed by folder",
+      "example": "include_contents: default\nskills:\n  - skills/repo-lens",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "S8",
+      "artifact": "agent.yaml",
+      "rule": "Callbacks: \"SandboxedLlmAgentConfig accepts before_model_callbacks, after_model_callbacks, before_...\" (question, truncated); resolved via closed CallbackRegistry",
+      "example": "",
+      "source": "topic_743964.txt; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "S9",
+      "artifact": "agent.yaml",
+      "rule": "Compiled agent classes seen by a participant bridge check: LlmAgent, SequentialAgent, ParallelAgent, LoopAgent (workflow agents must have sub_agents: \"empty workflow\" error in participant code); host does not support parallel calls",
+      "example": "",
+      "source": "gemma-and-the-shape-of-doubt.ipynb; topic_743964.txt"
+    },
+    {
+      "id": "S10",
+      "artifact": "SKILL.md",
+      "rule": "Skill = folder skills/<name>/ with SKILL.md (YAML front matter name/description) plus scripts/; invoked through run_skill_script",
+      "example": "---\nname: repo-lens\ndescription: Read-only lexical source localization ...\n---",
+      "source": "gemma-and-the-shape-of-doubt.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; topic_744133.txt"
+    },
+    {
+      "id": "S11",
+      "artifact": "tool_call",
+      "rule": "run_skill_script arguments: skill_name, file_path, args as list of strings",
+      "example": "Call `run_skill_script` with `skill_name=\"repo-lens\"`, `file_path=\"scripts/repo_lens.py\"` ... {\"args\":[\"--root\",\"/workspace\",\"--query\",\"...\",\"--top\",\"4\"]}",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "S12",
+      "artifact": "other",
+      "rule": "configs/sampling.yaml (generate_content_config): temperature, top_p, top_k, seed, max_output_tokens, thinking_config {thinking_budget, include_thoughts}; omit thinking_level",
+      "example": "temperature: 0.2\ntop_p: 0.95\nmax_output_tokens: 16384\nthinking_config:\n  thinking_budget: 4096\n  include_thoughts: true",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-and-the-shape-of-doubt.ipynb; gemma4-baseline-agent-v2-compile-fixed.ipynb"
+    },
+    {
+      "id": "S13",
+      "artifact": "other",
+      "rule": "thinking_config mapping in adk_submission 0.2.12: \"include_thoughts: false ↓ enable_thinking: false ↓ no reasoning generated\"; budget unused when include_thoughts false",
+      "example": "thinking_config:\n  thinking_budget: 4096\n  include_thoughts: false",
+      "source": "topic_745059.txt"
+    },
+    {
+      "id": "S14",
+      "artifact": "other",
+      "rule": "eval_config.yaml: four keys under `evaluation:` (starter code also reads a flat file and falls back from max_turns to max_llm_calls)",
+      "example": "evaluation:\n  timeout_seconds: 120\n  max_tool_calls: 40\n  max_time_minutes: 5\n  max_turns: 100",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "S15",
+      "artifact": "other",
+      "rule": "Host sample eval_config (pitfall: 1 minute / 10 tool calls)",
+      "example": "evaluation:\n  timeout_seconds: 60\n  max_tool_calls: 10\n  max_time_minutes: 1\n  max_turns: 50",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "S16",
+      "artifact": "submission.zip",
+      "rule": "agent.yaml must be at the zip root; zip relative paths from the bundle dir",
+      "example": "zip_path = Path(shutil.make_archive(str(zip_base), 'zip', root_dir=AGENT_DIR))",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "S17",
+      "artifact": "submission.zip",
+      "rule": "Bundle layout",
+      "example": "submission.zip\n├── agent.yaml\n├── prompts/system.md\n├── configs/sampling.yaml\n└── eval_config.yaml",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "S18",
+      "artifact": "submission.zip",
+      "rule": "Optional dirs: sub_agents/*.yaml, skills/<name>/SKILL.md, adapters/<name>/ (adapter_config.json + adapter_model.safetensors)",
+      "example": "└── adapters/<name>/       # optional LoRA (adapter_config.json + adapter_model.safetensors)",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "S19",
+      "artifact": "submission.zip",
+      "rule": "No bytecode caches: a \"Python bytecode cache inside the submitted directory\" was rejected by the official compiler",
+      "example": "",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "S20",
+      "artifact": "tool_call",
+      "rule": "Gemma 4 tool-response rendering in chat template; tool results arrive as JSON string {\"status\": \"ok\", \"content\": \"...\"} wrapped by ADK as {\"result\": ...} (double-encoded before 09-30 fix)",
+      "example": "<|tool_response>response:read_file{value:<|\"|>...<|\"|>}<tool_response|>",
+      "source": "topic_744272.txt"
+    },
+    {
+      "id": "S21",
+      "artifact": "tool_call",
+      "rule": "Tool error payload format",
+      "example": "{'status': 'error', 'error_type': 'FileEditError', 'error_message': \"Failed to replace: old_string not found.",
+      "source": "topic_745003.txt"
+    },
+    {
+      "id": "S22",
+      "artifact": "tool_call",
+      "rule": "edit_file old_string must be byte-for-byte source text; strip read_file line-number prefixes",
+      "example": "\"strip any line-number prefixes\"",
+      "source": "topic_744272.txt; topic_745003.txt; gemma4-baseline-agent-v2-compile-fixed.ipynb"
+    },
+    {
+      "id": "S23",
+      "artifact": "tool_call",
+      "rule": "vLLM gemma4 tool parser hangs on array args where a string delimiter opens and never closes",
+      "example": "x:[a<|\"|>]",
+      "source": "topic_745138.txt"
+    },
+    {
+      "id": "S24",
+      "artifact": "tool_call",
+      "rule": "Thought must be sent as `reasoning` (vLLM 0.19.1 ignores `reasoning_content`)",
+      "example": "reasoning = message.get(\"reasoning\") or message.get(\"reasoning_content\")",
+      "source": "topic_744354.txt"
+    },
+    {
+      "id": "S25",
+      "artifact": "patch",
+      "rule": "submit_patch output is `git add -N . && git diff HEAD`; scratch files in /workspace end up in the patch",
+      "example": "submit_patch()  →  git add -N . && git diff HEAD",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "S26",
+      "artifact": "patch",
+      "rule": "Task patches in tasks.jsonl are plain ---/+++ diffs without diff --git headers; created files appear as --- a/<path> with a single @@ -0,0 +1,N @@ hunk",
+      "example": "",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "S27",
+      "artifact": "patch",
+      "rule": "Test-file reset before test_patch uses git checkout (no-op when a pathspec is missing); suggested fix with git ls-tree",
+      "example": "git checkout HEAD -- <files_to_reset> 2>/dev/null || true",
+      "source": "topic_744825.txt"
+    },
+    {
+      "id": "S28",
+      "artifact": "other",
+      "rule": "Graded pytest command (re-issued README): adds --junitxml, -s and PYTHONNOUSERSITE=1, drops -o norecursedirs",
+      "example": "",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "S29",
+      "artifact": "other",
+      "rule": "tasks.jsonl has 8 keys (incl. instance_id, repo, base_commit, problem_statement, patch, test_patch, hints_text, created_at); no FAIL_TO_PASS / PASS_TO_PASS",
+      "example": "",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; hidden-interfaces-audit-and-execution.ipynb; gemma-4-dev-agent-task-anatomy-survival-kit.ipynb"
+    },
+    {
+      "id": "S30",
+      "artifact": "other",
+      "rule": "Graph/embedding lookup: candidates <repo_short>_<base_commit>, <owner>_<repo>_<base_commit>, <owner>_<repo>, <repo_short> (+.json/.npz); task-named files never read",
+      "example": "",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "S31",
+      "artifact": "other",
+      "rule": "Wheelhouse install: restore \"+cu128\" in wheel names stripped by Kaggle, then pip install --no-deps --force-reinstall",
+      "example": "w.name.replace('cu128', '+cu128')",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "S32",
+      "artifact": "other",
+      "rule": "LoRA adapter served via vLLM --lora-modules; \"the agent's model is rewritten to `openai/<adapter-name>`\"",
+      "example": "--enable-lora --lora-modules name=path",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; topic_743508.txt"
+    }
+  ],
+  "errors": [
+    {
+      "id": "E1",
+      "message": "Notebook Threw Exception",
+      "stage": "grading",
+      "cause": "Mostly submissions on 2026-09-30/10-01 after the Sep 30 wheelhouse update; host: \"We had a GPU outage overnight.\" Some reporters suspected LoRA sizing with no adapters (guess) or prompt-only changes; root cause not shown to participants",
+      "fix": "Host: \"Resolved now, and submissions should be working again.\"; reruns/allowance restoration requested but not confirmed",
+      "source": "topic_744800.txt; topic_744802.txt; topic_744805.txt; topic_744807.txt; topic_744813.txt; topic_744861.txt; topic_744924.txt"
+    },
+    {
+      "id": "E2",
+      "message": "Your notebook hit an unhandled error while rerunning your code",
+      "stage": "grading",
+      "cause": "Seen for: official sample_submission submitted as-is (ships placeholder adapters main_lora/tool_lora), an adapter submission (56719837), and Oct 1 outage-era prompt-only bundles",
+      "fix": "Same as GPU-outage fix; for sample_submission: build your own bundle / remove placeholder adapters",
+      "source": "topic_743140.txt; topic_744331.txt; topic_744807.txt; topic_744800.txt; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "E3",
+      "message": "Your notebook has requested more CPU, GPU or TPU resources than are available.",
+      "stage": "grading",
+      "cause": "Platform issue with L4x4 submissions around 2026-09-25/26",
+      "fix": "Host: \"I believe I've resolved the issue\" and promised to rerun affected submissions; rescore later paused \"until we can resolve the queueing for the L4x4 machines\"",
+      "source": "topic_743683.txt"
+    },
+    {
+      "id": "E4",
+      "message": "Did not find output file 'submission.zip' in the submitted Notebook.",
+      "stage": "packaging",
+      "cause": "Clicking 'submit' before saving/running the notebook version (\"submission fails instantly due to system error\")",
+      "fix": "Host: \"I think this is WAI. Your notebook needs to generate a submission file (submission.zip) before that submission can be scored.\"; save version, run, then submit",
+      "source": "topic_743683.txt"
+    },
+    {
+      "id": "E5",
+      "message": "ValueError: Gemma4ForConditionalGeneration does not support LoRA yet",
+      "stage": "model",
+      "cause": "Tagged vLLM 0.19.1 does not implement SupportsLoRA for Gemma4ForConditionalGeneration; starting the model with the sample adapter main_lora",
+      "fix": "Host: \"We're using a patched version of vLLM 0.19, updated in the wheelhouse recently. You might try re-downloading or updating your wheelhouse dataset\"",
+      "source": "topic_744070.txt; topic_743508.txt"
+    },
+    {
+      "id": "E6",
+      "message": "No LoRA weights found for module language_model.model.self_decoder.decoder_layers.N..., skipping.",
+      "stage": "model",
+      "cause": "Patched vLLM registers each Gemma4 decoder layer twice (YOCO alias); reset_lora under the alias zeroes adapter weights just set, so adapters have no effect (\"every lora_b_stacked slot is zero\")",
+      "fix": "Host: \"The zeroing fix landed in v23 of the wheelhouse dataset (now on v25).\"",
+      "source": "topic_743508.txt"
+    },
+    {
+      "id": "E7",
+      "message": "Running: 0 reqs, Waiting: 1 reqs",
+      "stage": "model",
+      "cause": "With LoRA enabled (max_loras 8 x max_lora_rank 128 preallocated) the 4xL4 KV cache drops from 46,048 to 7,600 tokens; a ~20.7k-token prompt never starts for 600 s",
+      "fix": "Host: \"I will patch to set the loras parameters based on the submission\"; later \"Now vLLM will set its LoRA params dynamically based on what you actually submit.\"",
+      "source": "topic_744331.txt; topic_744794.txt"
+    },
+    {
+      "id": "E8",
+      "message": "Sandbox execution error: litellm.ContextWindowExceededError: litellm.BadRequestError: ContextWindowExceededError: OpenAIException - This model's maximum context length is 32768 tokens. However, you requested 2048 output tokens and your prompt contains at least 30721 input tokens, for a total of at least 32769 tokens. Please reduce ...",
+      "stage": "model",
+      "cause": "prompt + max_output_tokens > 32,768 (vLLM max_model_len); long tool outputs, uncapped search_similar_code results, compaction firing too late",
+      "fix": "Lower max_output_tokens (8,192 suggested), bound tool output, query specific function names; host to cap search_similar_code at max_stdout_chars",
+      "source": "gemma-and-the-shape-of-doubt.ipynb; topic_744577.txt; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "E9",
+      "message": "This model's maximum context length is 32768 tokens. However, you requested 16384 output tokens and your prompt contains at least 16385 input tokens, for a total of at least 32769 tokens. Please reduce the length of the input prompt or the number of requested output tokens. (parameter=input_tokens, value=16385)",
+      "stage": "model",
+      "cause": "Host sample sampling.yaml asks max_output_tokens: 16384, so any prompt >= 16,385 tokens is refused; compaction trigger 14,336 leaves only 2,048 tokens of room",
+      "fix": "\"set `max_output_tokens: 8192`\" (author later reported an error-with-no-score submission after that change, suspected 12-hour limit)",
+      "source": "gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "E10",
+      "message": "ContextWindowExceededError ... caught by the generic except Exception in run_agent_sandbox, which skips the fallback git diff capture (only TimeoutError / LlmCallsLimitExceededError reach it)",
+      "stage": "grading",
+      "cause": "Context overflow ends the session and discards edits: \"44 of 44 overflowed sessions had an empty patch, 14 of them after successful edits\"; token_threshold 32,768 means compaction can never fire",
+      "fix": "Host: \"Thanks, I will look into it.\"; use token_threshold 14,336 / smaller max_output_tokens",
+      "source": "topic_744692.txt; topic_744577.txt"
+    },
+    {
+      "id": "E11",
+      "message": "Failed to replace: old_string not found. Ensure you're not escaping content incorrectly ...",
+      "stage": "runtime",
+      "cause": "Tool results reached the model double-JSON-encoded, so the model copied escapes into old_string (\"62 of 299 edit_file calls failed with old_string not found ... For 39 of them ... the cause is provably the escaping\"); also line-number prefixes",
+      "fix": "Host: \"The latest wheelhouse should have this fixed.\"; \"the fix is live in the 09-30 wheelhouse ... edit_file gained a fallback\"; prompt: \"strip any line-number prefixes\"",
+      "source": "topic_744272.txt; topic_745003.txt; topic_744794.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E12",
+      "message": "{'status': 'error', 'error_type': 'FileEditError', 'error_message': \"Failed to replace: old_string not found.",
+      "stage": "runtime",
+      "cause": "edit_file mismatch (whitespace/indentation handled; line-number prefixes not)",
+      "fix": "Prompt the model to strip line-number prefixes",
+      "source": "topic_745003.txt"
+    },
+    {
+      "id": "E13",
+      "message": "'>' not supported between instances of 'int' and 'str'",
+      "stage": "runtime",
+      "cause": "read_file tool call with line ranges always failed (wheelhouse of ~Sep 30)",
+      "fix": "Host: \"Fix incoming.\" / \"The fix should be in the current wheelhouse. I recommend just updating the packages.\"",
+      "source": "topic_744678.txt; topic_744805.txt"
+    },
+    {
+      "id": "E14",
+      "message": "ValueError: Tool 'search_similar_code' not found.\nAvailable tools: run_command, read_file, edit_file, submit_patch",
+      "stage": "runtime",
+      "cause": "Model calls a tool not declared in agent.yaml (task message still advertises graph tools; hallucinated names); ADK _get_tool raises, session ends, \"resolved=False, exit_code=-1, patch_chars=0\"",
+      "fix": "Proposed: return error as tool result via on_tool_error_callback or build tool sections from declared tools; host: \"Yes, let me look into it and I'll implement something.\"",
+      "source": "topic_745052.txt; topic_745028.txt"
+    },
+    {
+      "id": "E15",
+      "message": "ValueError(\"Tool '...' not found ...\")",
+      "stage": "runtime",
+      "cause": "Undeclared or hallucinated tool name; \"quantized models invent tool names more often\"",
+      "fix": "Same as above (pending)",
+      "source": "topic_745028.txt"
+    },
+    {
+      "id": "E16",
+      "message": "Failed to apply test_patch: ... Reversed (or previously applied) patch detected",
+      "stage": "grading",
+      "cause": "Agent edited an existing test file and the anti-tampering reset is a no-op: \"git checkout aborts the whole command if any pathspec doesn't match, and the error is swallowed\" (sitecustomize.py, usercustomize.py, _swegemma_stubs.py)",
+      "fix": "Suggested `git ls-tree -r -z --name-only HEAD -- <files_to_reset> | xargs -0 -r git checkout HEAD --`; host: \"Addressing now.\"; never edit test files",
+      "source": "topic_744825.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E17",
+      "message": "error: pathspec 'sitecustomize.py' did not match ...",
+      "stage": "grading",
+      "cause": "Repro of the test-file reset bug (files outside /workspace HEAD)",
+      "fix": "See above",
+      "source": "topic_744825.txt"
+    },
+    {
+      "id": "E18",
+      "message": "Failed to apply test_patch: git apply .../tmp/tmpcxr5a1b2.patch failed (1):\\nerror: patch failed: tests/test_request_params/test_file/test_list.py:37 ... 4 out of 4 hunks FAILED",
+      "stage": "grading",
+      "cause": "Candidate agent changed ten existing FastAPI test files (fastapi_14953); \"held-test application failed on all ten paths\"",
+      "fix": "Do not modify tests",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E19",
+      "message": "ModuleNotFoundError: No module named 'typing_inspection'",
+      "stage": "grading",
+      "cause": "Public wheels/ lacks typing_inspection (pydantic 2 dependency), inline_snapshot, dirty_equals, attrs; pytest collection fails for FastAPI tasks even with the gold patch; swegemma unpacked-wheel cache (swegemma_sp_cache_v8) ignores added wheels",
+      "fix": "Clear $TMPDIR/swegemma_sp_cache_v8 or use separate TMPDIR; host: hidden tasks \"validate at 100%\" with gold patches; \"We will work on improving the training set.\"",
+      "source": "topic_744029.txt; topic_744370.txt; topic_743973.txt; topic_744259.txt"
+    },
+    {
+      "id": "E20",
+      "message": "pytest stops at collection (pydantic 2.13.4 installed but typing_inspection missing)",
+      "stage": "grading",
+      "cause": "\"All 19 fastapi tasks I have locally failed this way\"",
+      "fix": "None official for public set",
+      "source": "topic_744370.txt"
+    },
+    {
+      "id": "E21",
+      "message": "recursive httpbin fixture",
+      "stage": "grading",
+      "cause": "Some requests tasks fail with the gold patch (\"complain about a recursive httpbin fixture\")",
+      "fix": "None given",
+      "source": "topic_744370.txt"
+    },
+    {
+      "id": "E22",
+      "message": "rich output does not match expected text",
+      "stage": "grading",
+      "cause": "Pygments version difference; \"rich_4070 fails the gold patch with 6 failed and 118 passed on pygments output\" under a free resolve",
+      "fix": "Pin snapshot Pygments (2.19.2) / dependency-only repairs",
+      "source": "topic_744370.txt; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "E23",
+      "message": "gold patch cannot reach exit code 0 (fastapi_15745, fastapi_15763, fastapi_15785)",
+      "stage": "grading",
+      "cause": "\"the graders disable anyio twice, on the CLI and inside the pytest.ini their own setup.py writes\"",
+      "fix": "\"re-enabling anyio and changing nothing else passes 39/39\"",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E24",
+      "message": "gold patch cannot reach exit code 0 (rich_3472)",
+      "stage": "grading",
+      "cause": "\"an unrelated test in the same target file hardcodes a CPython attribute-error message that changed in 3.13\"",
+      "fix": "None",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E25",
+      "message": "collection error under the pinned pytest (requests_6589, requests_6592, requests_6629)",
+      "stage": "grading",
+      "cause": "\"the snapshot pins pytest<=6.2.5 and setup.py forces --import-mode=importlib\"",
+      "fix": "Not decidable offline",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E26",
+      "message": "residual failures with the gold patch (requests_6757)",
+      "stage": "grading",
+      "cause": "\"Python 3.13 turns VERIFY_X509_STRICT on by default and the bundled test CA has no Authority Key Identifier\"",
+      "fix": "None",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E27",
+      "message": "passes with an EMPTY patch (fastapi_14077, fastapi_14851, rich_3468)",
+      "stage": "grading",
+      "cause": "test_patch cannot discriminate the fix",
+      "fix": "Exclude from local evaluation",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-4-measure-before-you-tune.ipynb; topic_744259.txt"
+    },
+    {
+      "id": "E28",
+      "message": "Starlette 1.6.0 injected; older FastAPI commits fail collection",
+      "stage": "grading",
+      "cause": "\"swegemma injects the newest cached wheels (e.g. Starlette 1.6.0)\"; reference patch passes only 18 of 40 TRAIN tasks (3 of 23 FastAPI)",
+      "fix": "Host: test set \"more rigorously filtered\"",
+      "source": "topic_744259.txt"
+    },
+    {
+      "id": "E29",
+      "message": "Agent exceeded session timeout (5 min)",
+      "stage": "runtime",
+      "cause": "max_time_minutes reached (5-minute budget)",
+      "fix": "Raise budget or finish earlier",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E30",
+      "message": "Agent exceeded tool call budget (45 calls)",
+      "stage": "runtime",
+      "cause": "max_tool_calls reached",
+      "fix": "Raise max_tool_calls / avoid repeated calls",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E31",
+      "message": "BudgetExceeded",
+      "stage": "runtime",
+      "cause": "\"The 11th budget-gated call returns `BudgetExceeded`\" with sample max_tool_calls: 10; \"with 10 the agent is never warned\"",
+      "fix": "Use own eval_config budgets",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "E32",
+      "message": "Evaluation error: FastAPI import/plugin preflight failed; inspect retained probe log",
+      "stage": "validate",
+      "cause": "Participant local replay: \"importing `inline_snapshot` before pytest initialized assertion rewriting triggered the repository's warnings-as-errors setting\"",
+      "fix": "\"The helper now lets pytest register the plugin before inspecting it\"",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E33",
+      "message": "Requests suites timed out (60-second cap) with DNS blocking",
+      "stage": "grading",
+      "cause": "\"Two Requests runs timed out in suites with directly observed DNS blocking\" in the offline sandbox",
+      "fix": "RES_OPTIONS=\"timeout:1 attempts:1\" in replay",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E34",
+      "message": "Official compiler rejected bundle containing a Python bytecode cache",
+      "stage": "compile",
+      "cause": "\"helper tests had created a Python bytecode cache inside the submitted directory, which the official compiler correctly rejected\"",
+      "fix": "Disable bytecode writes (PYTHONDONTWRITEBYTECODE) before packaging",
+      "source": "gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E35",
+      "message": "Disallowed file extension: {info.filename}",
+      "stage": "packaging",
+      "cause": "File suffix not in ALLOWED_SUBMISSION_EXTENSIONS",
+      "fix": "Use only allowed extensions",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; eval-errors-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "E36",
+      "message": "Archive exceeds 3 GiB limit: {total_size}",
+      "stage": "packaging",
+      "cause": "Bundle larger than MAX_SUBMISSION_SIZE_BYTES",
+      "fix": "Shrink bundle/adapters",
+      "source": "getting-started-gemma-4-developer-agent.ipynb; eval-errors-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "E37",
+      "message": "agent.yaml must be at the zip root",
+      "stage": "packaging",
+      "cause": "Zipping the folder instead of its contents",
+      "fix": "Write zip entries relative to bundle dir",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb"
+    },
+    {
+      "id": "E38",
+      "message": "need exactly one root config, found [...] / unresolved include/config_path / must declare exactly one base model, found [...] / disallowed extensions / bundle too big",
+      "stage": "validate",
+      "cause": "Participant dependency-free validator mirroring \"the host's hard checks\"",
+      "fix": "Fix bundle before submitting",
+      "source": "gemma-4-dev-agent-what-moves-the-leaderboard.ipynb"
+    },
+    {
+      "id": "E39",
+      "message": "unsupported reasoning_effort in Gemma bridge",
+      "stage": "model",
+      "cause": "\"`thinking_level`: the released bridge translates it into `reasoning_effort`, which the Kaggle runtime's LiteLLM rejects for this Gemma model\"",
+      "fix": "Omit thinking_level from sampling.yaml",
+      "source": "gemma-and-the-shape-of-doubt.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "E40",
+      "message": "Scorer error with no score after ~12-14 h (\"timeout after 14 hours in my case\")",
+      "stage": "grading",
+      "cause": "Run exceeding the 12-hour limit errors the whole submission (host: \"Currently, hitting the 12-hour limit will error\")",
+      "fix": "Budget per task via eval_config.yaml; fix to score unfinished tasks as 0 planned, not confirmed live",
+      "source": "topic_743683.txt; topic_743063.txt; topic_743964.txt; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "E41",
+      "message": "Notebook Exceeded Allowed Compute / Notebook Timeout",
+      "stage": "grading",
+      "cause": "Asked whether concurrent ParallelAgent requests or inference budget cause it",
+      "fix": "Host: no parallel calls supported; budget per task",
+      "source": "topic_743964.txt"
+    },
+    {
+      "id": "E42",
+      "message": "_parse_gemma4_args never returns",
+      "stage": "model",
+      "cause": "vLLM Gemma 4 tool parser infinite loop on 85 of 60,000 fuzzed array arguments where a string delimiter breaks bracket matching",
+      "fix": "Suggested guard on non-advancing index or timeout; no host reply",
+      "source": "topic_745138.txt"
+    },
+    {
+      "id": "E43",
+      "message": "thought in prompt: False (reasoning_content dropped)",
+      "stage": "model",
+      "cause": "ADK sends previous thought as reasoning_content; vLLM 0.19.1 only reads `reasoning`",
+      "fix": "Host: \"Yes, this is unambiguously a bug. The fix should be in the current wheelhouse.\"",
+      "source": "topic_744354.txt"
+    },
+    {
+      "id": "E44",
+      "message": "thinking_budget and seed missing from HTTP requests",
+      "stage": "model",
+      "cause": "adk_submission bridge ignores thinking_budget; ADK conversion does not pass seed (\"the installed Agent Development Kit (ADK) conversion omitted that seed\")",
+      "fix": "Host: \"I will patch.\" / \"The most recent wheelhouse dataset should have the patches.\"",
+      "source": "topic_744566.txt; gemma-4-measure-before-you-tune.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E45",
+      "message": "Compaction loses tool results; agent repeats last call until timeout",
+      "stage": "runtime",
+      "cause": "\"The ADK summary keeps only text parts, and Gemma-4 rarely writes text next to its tool calls\"",
+      "fix": "Host: \"I'll look into the compaction issue.\"",
+      "source": "topic_744794.txt"
+    },
+    {
+      "id": "E46",
+      "message": "search_similar_code returns unrelated test functions, all at similarity 1.0",
+      "stage": "runtime",
+      "cause": "Embeddings near-collapsed (mean random-pair cosine 0.78-0.90; 8-19% of pairs >= 0.99); 58,112 of 367,985 vectors duplicates",
+      "fix": "No host reply; prefer grep",
+      "source": "topic_744040.txt; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E47",
+      "message": "empty graph file fails json.load, every graph tool returns an error",
+      "stage": "runtime",
+      "cause": "Before the 2026-09-25 re-issue, 129 of 256 graph/embedding files were 0 bytes and the harness opens the first existing candidate",
+      "fix": "Organisers re-uploaded files on 2026-09-25 (no announcement); now 129/129 tasks have graphs",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "E48",
+      "message": "Requests tests import the system package instead of /workspace/src/requests",
+      "stage": "grading",
+      "cause": "install_editable_package() returns early for the subprocess sandbox; PYTHONPATH=/workspace",
+      "fix": "PYTHONPATH=src locally; no host reply",
+      "source": "topic_744889.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "E49",
+      "message": "base_commit not present in snapshot archive (requests_7309, requests_7315)",
+      "stage": "other",
+      "cause": "Archive main points to a different commit than tasks.jsonl base_commit",
+      "fix": "No host reply",
+      "source": "topic_744078.txt"
+    },
+    {
+      "id": "E50",
+      "message": "Maximum batch GPU session count of 2 reached",
+      "stage": "other",
+      "cause": "Third CLI batch GPU push while two are queued/running",
+      "fix": "Wait; saving a new version can cancel the queued one",
+      "source": "gemma-4-dev-agent-task-anatomy-survival-kit.ipynb"
+    },
+    {
+      "id": "E51",
+      "message": "L4 x4 session stuck in \"Queued\" for 8-24 hours",
+      "stage": "other",
+      "cause": "L4x4 capacity",
+      "fix": "Host paused rescoring \"until we can resolve the queueing for the L4x4 machines\"",
+      "source": "topic_743901.txt; topic_744054.txt; topic_743007.txt; topic_743683.txt"
+    },
+    {
+      "id": "E52",
+      "message": "10 hours were deducted from my GPU quota (5 h queue + 5 h run)",
+      "stage": "other",
+      "cause": "L4 x4 billed at 2x",
+      "fix": "None",
+      "source": "topic_743683.txt"
+    },
+    {
+      "id": "E53",
+      "message": "invalid invite error in discord",
+      "stage": "other",
+      "cause": "Discord link",
+      "fix": "None given",
+      "source": "topic_742815.txt"
+    },
+    {
+      "id": "E54",
+      "message": "Starlette dependency conflict installing the complete historical wheelhouse",
+      "stage": "packaging",
+      "cause": "\"The complete historical wheelhouse could not be installed together because of a Starlette dependency conflict\"",
+      "fix": "Frozen compatible lock of 257 packages",
+      "source": "gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "E55",
+      "message": "subprocess sandbox environment failures (public tasks)",
+      "stage": "grading",
+      "cause": "Host: \"This may be a problem with the subprocess sandbox. I don't recall seeing these failures using the Docker sandbox.\"; subprocess backend \"skips test dependency installation entirely\"",
+      "fix": "Use Docker path / emulate ContainerManager",
+      "source": "topic_742882.txt; gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "E56",
+      "message": "\"I keep getting this error when I try to submit a zip.\" (error text itself not in file)",
+      "stage": "packaging",
+      "cause": "Unknown; second user: \"very first submission. and just ran into the same problem.\"",
+      "fix": "None given",
+      "source": "topic_744153.txt"
+    },
+    {
+      "id": "E57",
+      "message": "rich_4075 broken-pipe scheduling race",
+      "stage": "grading",
+      "cause": "test asserts `python -m rich | head -1` kills writer; \"failed once in 89 observations\"",
+      "fix": "Re-verify once",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    }
+  ],
+  "tasks_tests": [
+    {
+      "id": "T1",
+      "description": "Each task is a real GitHub issue/PR from an open-source Python project plus the repository at base_commit; the agent must produce a patch (git diff); \"The grader applies the maintainers' hidden tests; the task counts only if they all pass.\"",
+      "how_graded": "Score = fraction of tasks resolved (\"percentage of patched repositories that pass the validation tests\")",
+      "numbers": "test set ~120 tasks",
+      "source": "gemma-4-dev-agent-task-anatomy-survival-kit.ipynb; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "T2",
+      "description": "Two-phase evaluation: Phase 1 agent in sandbox A (\"offline, 2 vCPU, 4 GB\") explores /workspace and calls submit_patch; Phase 2 \"fresh sandbox B\": patch applied, hidden tests run",
+      "how_graded": "Container B: clean repo + hidden tests -> apply patch -> PASS/FAIL",
+      "numbers": "defaults 60 min / 500 turns per task (Container A)",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; getting-started-gemma-4-developer-agent.ipynb"
+    },
+    {
+      "id": "T3",
+      "description": "Public development data tasks.jsonl: \"This competition evaluates AI software engineering agents on their ability to solve real-world Python bug fixes and feature requests.\"",
+      "how_graded": "Practice only (reference patches included)",
+      "numbers": "129 tasks: fastapi 67, rich 48, requests 13, httpx 1",
+      "source": "topic_744020.txt; gemma-4-dev-agent-task-anatomy-survival-kit.ipynb; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "T4",
+      "description": "Hidden test set: ~120 tasks from private repositories, ~60 public / ~60 private, scored in the same 12-hour run, sequentially",
+      "how_graded": "Public LB = 50% of test set; displayed score truncated to 2 decimals",
+      "numbers": "public split inferred 58 tasks; 1 task = 0.0172; 0.12 = 7 tasks",
+      "source": "topic_744258.txt; topic_744951.txt; gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "T5",
+      "description": "Hidden tasks filtered: \"The tasks in the test set have been more rigorously filtered. I can confirm that a submission with \\\"gold patches\\\" validates at 100%.\"",
+      "how_graded": "Gold-patch control",
+      "numbers": "100% gold validation (host)",
+      "source": "topic_744259.txt; topic_744370.txt; topic_742882.txt"
+    },
+    {
+      "id": "T6",
+      "description": "Resolution decision in Container B (swegemma 0.2.7): pytest exit 0 AND JUnit report parses with >=1 pass, 0 failures, 0 errors AND every test added by test_patch passed (skip = fail) AND summary not \"0 passed\"",
+      "how_graded": "README §8.2 states only exit code 0; re-issued README (2026-09-25) adds JUnit + required nodes (\"a skip does not count as a pass\"); required nodes from FAIL_TO_PASS/PASS_TO_PASS or extracted from test_patch",
+      "numbers": "n/a",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "T7",
+      "description": "Task anatomy (public 129)",
+      "how_graded": "n/a",
+      "numbers": "64% of fixes <=20 lines, 34% <=5; median 12 lines; 71% touch one source file; 57% single-file and <=20 lines; 76% of issues name neither file nor function; 21/129 (16%) touch async code; no task ships hints_text; issue median 418 chars; Spearman 0.07 issue length vs fix size",
+      "source": "gemma-4-dev-agent-task-anatomy-survival-kit.ipynb; topic_743957.txt; gemma-and-the-shape-of-doubt.ipynb"
+    },
+    {
+      "id": "T8",
+      "description": "Public-task soundness audit (empty patch must fail, gold must pass)",
+      "how_graded": "Paired empty/gold controls",
+      "numbers": "119 of 129 sound (92.25%); 2 pass empty; 8 gold cannot reach rc 0; floor 2/129, ceiling 125/129; 117/129 under raw required-node surrogate",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "T9",
+      "description": "Second soundness audit",
+      "how_graded": "Paired controls after \"nine dependency repairs\"",
+      "numbers": "114 of 129 sound, 15 exclusions; 119 reference passes, 2 empty passes; FastAPI 62/67, Rich 44/48, Requests 7/13, HTTPX 1/1",
+      "source": "gemma-4-measure-before-you-tune.ipynb"
+    },
+    {
+      "id": "T10",
+      "description": "Third audit (official verifier, 1,210 runs in 6 environments)",
+      "how_graded": "gold / empty / valid per environment",
+      "numbers": "published 43/3/40; completed 55/4/51; completed_pinned 94 fixes, 2 empty, 92 valid; completed2_pinned 107/2/105",
+      "source": "gemma-4-developer-agent-cpu-audit-tables.ipynb"
+    },
+    {
+      "id": "T11",
+      "description": "Gold-patch checks reported in forum",
+      "how_graded": "Gold patch through local harness",
+      "numbers": "reference patch passes 18 of 40 TRAIN tasks (3 of 23 FastAPI); \"All 19 fastapi tasks I have locally failed\"; \"around half of the 129 tasks\" unsolvable locally; rich_3468 passes with empty patch",
+      "source": "topic_744259.txt; topic_744370.txt; topic_743973.txt"
+    },
+    {
+      "id": "T12",
+      "description": "Twelve anomalies list (fastapi_14077, fastapi_14851 pass empty; fastapi_15745/15763/15785 anyio; rich_3472; requests_6589/6592/6629 pinned pytest; requests_6757 X509; fastapi_14186, rich_3486 skip markers)",
+      "how_graded": "Per-task diagnostic runs",
+      "numbers": "10 of 129 = 7.8 pp non-discriminating",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "T13",
+      "description": "Hidden-interface audit: A = pre-fix + hidden tests (expect FAIL), B = + reference fix (expect PASS), C = same fix with hidden names renamed",
+      "how_graded": "Deterministic detector, no model",
+      "numbers": "129 tasks; ~1.5 h run",
+      "source": "hidden-interfaces-audit-and-execution.ipynb"
+    },
+    {
+      "id": "T14",
+      "description": "Code graphs / embeddings for retrieval tools",
+      "how_graded": "n/a",
+      "numbers": "pre-2026-09-25: 256 graph + 256 embedding files, 129 of each zero bytes; after re-issue 524 files, graphs 129/129; 0 of 68,449 async defs as nodes; only `calls` edges; gold file in top-10 for 35 tasks vs 67 for grep",
+      "source": "119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb; topic_744040.txt"
+    },
+    {
+      "id": "T15",
+      "description": "Time budget planning",
+      "how_graded": "12 h total incl. sandbox setup, excl. validation",
+      "numbers": "\"about 4.5 minutes for 120 tasks, 2 minutes for 240\"; \"~4–5 agent minutes per task\"; max_time_minutes at most 4.94-5.98; ~282 s uninflated task time; baseline 17.54 h at 1x; scoring took 14.5 h / \"approximately 12 hours\"",
+      "source": "topic_744258.txt; gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; gemma-4-measure-before-you-tune.ipynb; topic_743140.txt; topic_743683.txt"
+    },
+    {
+      "id": "T16",
+      "description": "Reported leaderboard results",
+      "how_graded": "Public LB",
+      "numbers": "nursrijan EDA & ADK Starter Kit notebook 0.05; Roman Rozen baseline 0.12 (fork 0.08, 14.5 h); bare-bones 0.08; official sample_submission FAILED; CV/LB 0.18/0.05, 0.19/0.06, 0.23/0.12, 0.24/0.10; local ~0.2 -> LB <0.12; prvsiyan 0.08; dmitriigluzdov 0.08; dariushafshar 0.06 = 4/58; busyaprime 4/58 = 6.90% vs predicted 17; leader 0.13 (Sep 25); wall ~0.12; 863 teams, bronze cut 6 tasks shared by 124 teams",
+      "source": "topic_743140.txt; topic_744319.txt; gemma-and-the-shape-of-doubt.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-4-dev-agent-what-moves-the-leaderboard.ipynb; gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb"
+    },
+    {
+      "id": "T17",
+      "description": "Local agent evaluations",
+      "how_graded": "Own harness runs",
+      "numbers": "v4 14/44 vs coder+analyzer 13/44 on held-out Rich; dev 15/70; 181/645 patches resolved (28.06%); 42 of 68 runs ended with zero edits; prvsiyan 2/4 + 3/12 (V10), 7/16 (V14), 6/16 (V18), 4/16 (V19); 7 traced sample-agent tasks: 0 resolved, 1 refused",
+      "source": "gemma-4-measure-before-you-tune.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb; gemma-and-the-shape-of-doubt.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "T18",
+      "description": "Serving measurements on 4xL4",
+      "how_graded": "n/a",
+      "numbers": "KV cache 46,048 tokens without adapters vs 7,600 with LoRA; 46,352 at util 0.90; 87,985 tokens; ~34 output tok/s; model calls 98.7-100% of agent time; vLLM startup ~350-562 s",
+      "source": "topic_744331.txt; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb; 119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb"
+    },
+    {
+      "id": "T19",
+      "description": "Host sample_submission",
+      "how_graded": "n/a",
+      "numbers": "budget 1 minute / 10 tool calls / 60 s commands / 50 turns; ships placeholder adapters main_lora + tool_lora with zero B tensors; max_output_tokens 16384, thinking_budget 4096",
+      "source": "gemma-4-dev-agent-zero-to-first-valid-submission.ipynb; gemma-4-developer-agent-cpu-audit-tables.ipynb; gemma-4-measure-before-you-tune.ipynb; gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb"
+    },
+    {
+      "id": "T20",
+      "description": "Participant local evaluation workflows",
+      "how_graded": "Generate on 4x L4 Kaggle notebook, grade patches locally with the official verifier in Docker; subset where none/gold controls behave",
+      "numbers": "\"my evaluation set is limited to 38 tasks from the Rich repository\"; llama.cpp on 2x3060 / 4x3090; \"I submit my latest notebook with a very small target task set to ensure that it executes properly\"; CV vs LB poorly correlated",
+      "source": "topic_744611.txt; topic_744054.txt; topic_744319.txt"
+    },
+    {
+      "id": "T21",
+      "description": "Public notebook index (titles signalling LB claims)",
+      "how_graded": "Public LB as claimed in titles",
+      "numbers": "\"GEMMA: EDA, Baseline for a start | LB TOP 1\" (189 votes); \"[0.10]: Gemma 4 Developer Agent Submission\"; \"Gemma 4 Triad LB score 0.03\"; \"Gemma 4 LB: 58 Tasks, Bronze Is a 124-Team Tie\"; \"Getting Started - Gemma 4 Developer Agent\" (578 votes)",
+      "source": "index.csv"
+    },
+    {
+      "id": "T22",
+      "description": "Paper track",
+      "how_graded": "Writeups",
+      "numbers": "Writeups public after 12 November; PHP monolith study N=33, +6.8 pt lift, p≈0.11, \"30%+ verifier gaming\"",
+      "source": "topic_744941.txt; topic_745027.txt"
+    }
+  ],
+  "vocabulary": [
+    {
+      "term": "only",
+      "sense": "other",
+      "count": 340,
+      "example_contexts": [
+        "\"The scorer reads those, and only those, four fields.\" (topic_743063.txt)",
+        "\"Since this competition allows only one submission per day\" (topic_743140.txt)",
+        "\"search_similar_code only accepts an existing node name.\" (topic_744040.txt)"
+      ]
+    },
+    {
+      "term": "required",
+      "sense": "other",
+      "count": 160,
+      "example_contexts": [
+        "\"Starting that required model with the sample's adapter\" (topic_744070.txt)",
+        "\"every required test node passed explicitly\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "budget",
+      "sense": "other",
+      "count": 152,
+      "example_contexts": [
+        "\"12h overrun: Not yet. Budget per task using eval_config.yaml.\" (topic_743964.txt)"
+      ]
+    },
+    {
+      "term": "limit",
+      "sense": "other",
+      "count": 151,
+      "example_contexts": [
+        "\"The default is no limit.\" (topic_743063.txt)",
+        "\"Currently, hitting the 12-hour limit will error\" (topic_743063.txt)"
+      ]
+    },
+    {
+      "term": "never",
+      "sense": "banned",
+      "count": 120,
+      "example_contexts": [
+        "\"## Never\\n- Modify or create test files, conftest.py or pytest.ini (they are reset before grading).\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"Never edit tests, test_*.py, *_test.py, conftest.py, pytest.ini, CI, packaging, dependencies, or generated artifacts.\" (gemma4-baseline-agent-v2-compile-fixed.ipynb)",
+        "\"`adk-submission` states it never imports competitor Python\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "sandbox",
+      "sense": "other",
+      "count": 115,
+      "example_contexts": [
+        "\"The private Docker sandbox uses the same base image but installs a different set of...\" (topic_742882.txt)",
+        "\"compiled in a sandbox against closed registries\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ]
+    },
+    {
+      "term": "must",
+      "sense": "other",
+      "count": 98,
+      "example_contexts": [
+        "\"Code sharing must always be done publicly through the Kaggle forums/notebooks.\" (topic_742815.txt)",
+        "\"All agents must declare the same base model.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ]
+    },
+    {
+      "term": "validate",
+      "sense": "legal",
+      "count": 82,
+      "example_contexts": [
+        "\"I can confirm that a submission with \\\"gold patches\\\" validates at 100%.\" (topic_744259.txt)",
+        "\"validate locally before you spend it\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"A bundle that fails validation wastes a day's submission.\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)"
+      ]
+    },
+    {
+      "term": "cap",
+      "sense": "other",
+      "count": 76,
+      "example_contexts": [
+        "\"thinking_budget is enforced as a hard cap\" (topic_745143.txt)",
+        "\"Would it fit the design to cap the code field per result\" (topic_744577.txt)"
+      ]
+    },
+    {
+      "term": "block",
+      "sense": "other",
+      "count": 61,
+      "example_contexts": [
+        "\"The harness appends its code-intelligence block only when BOTH files for a repo exist and are # larger than 100 bytes\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "offline",
+      "sense": "other",
+      "count": 41,
+      "example_contexts": [
+        "\"sandbox A (offline, 2 vCPU, 4 GB)\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"Do not install packages; the sandbox is offline.\" (gemma-4-measure-before-you-tune.ipynb)",
+        "\"Gold patches fail offline for most FastAPI and requests tasks\" (topic_743973.txt)"
+      ]
+    },
+    {
+      "term": "support",
+      "sense": "ambiguous",
+      "count": 38,
+      "example_contexts": [
+        "\"Parallel: I we don't support parallel calls.\" (topic_743964.txt)",
+        "\"does not support LoRA yet\" (topic_743508.txt)",
+        "\"does the harness support tpu jax ?\" (topic_744589.txt)"
+      ]
+    },
+    {
+      "term": "unresolved",
+      "sense": "ambiguous",
+      "count": 37,
+      "example_contexts": [
+        "\"**Also unresolved:** whether distillation from external API models ... is allowed\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"These tasks remain unresolved.\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "confirm",
+      "sense": "ambiguous",
+      "count": 28,
+      "example_contexts": [
+        "\"Could you confirm a minimal adapter-bearing sample can be scored\" (topic_744070.txt)",
+        "\"Could you confirm the scorer's token_threshold?\" (topic_744692.txt)",
+        "\"Can you confirm this is unintended?\" (topic_744354.txt)"
+      ]
+    },
+    {
+      "term": "bug",
+      "sense": "ambiguous",
+      "count": 26,
+      "example_contexts": [
+        "\"Yes, this is unambiguously a bug.\" (topic_744354.txt)",
+        "\"I don't know whether this is a bug or a feature\" (topic_744272.txt)",
+        "\"These are definite dataset bugs, and gold patch cannot pass on py3.13\" (topic_743973.txt)"
+      ]
+    },
+    {
+      "term": "refused",
+      "sense": "banned",
+      "count": 24,
+      "example_contexts": [
+        "\"every call whose prompt reaches 16,385 tokens is refused\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)"
+      ]
+    },
+    {
+      "term": "valid",
+      "sense": "legal",
+      "count": 24,
+      "example_contexts": [
+        "\"Gemma 4 Dev Agent — Zero to First *Valid* Submission\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"Never leave a valid source edit unsubmitted because verification was unavailable.\" (gemma-4-measure-before-you-tune.ipynb)",
+        "\"completed_pinned: 94 fixes, 2 empty patches, 92 valid tasks\" (gemma-4-developer-agent-cpu-audit-tables.ipynb)"
+      ]
+    },
+    {
+      "term": "supported",
+      "sense": "legal",
+      "count": 23,
+      "example_contexts": [
+        "\"are timeout_seconds, max_tool_calls, max_time_minutes, and max_turns all supported\" (topic_743063.txt)",
+        "\"eval_config.yaml sets only the four supported keys\" (topic_744861.txt)",
+        "\"Is a CPU-only submission notebook like ours still supported?\" (topic_744861.txt)"
+      ]
+    },
+    {
+      "term": "excluded",
+      "sense": "other",
+      "count": 22,
+      "example_contexts": [
+        "\"is not located in Crimea, DNR, LNR, or another excluded territory\" (topic_743297.txt)",
+        "\"`fastapi_14077` passes without a fix, so it is excluded.\" (gemma-4-measure-before-you-tune.ipynb)"
+      ]
+    },
+    {
+      "term": "accept",
+      "sense": "other",
+      "count": 20,
+      "example_contexts": [
+        "\"search_similar_code only accepts an existing node name.\" (topic_744040.txt)",
+        "\"`generate_content_config` accepts sampling + `thinking_config`\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ]
+    },
+    {
+      "term": "refuses",
+      "sense": "banned",
+      "count": 19,
+      "example_contexts": [
+        "\"vLLM refuses any call whose prompt plus requested output is more than 32,768 tokens\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)",
+        "\"prvsiyan reports a refusal even at a 2,048 cap\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)"
+      ]
+    },
+    {
+      "term": "invalid",
+      "sense": "banned",
+      "count": 18,
+      "example_contexts": [
+        "\"could the LoRA sizing produce an invalid vLLM config when there are none?\" (topic_744861.txt)",
+        "\"invalid `/tmp` uses of the workspace-only file tool\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"I get invalid invite error in discord\" (topic_742815.txt)"
+      ]
+    },
+    {
+      "term": "allow",
+      "sense": "legal",
+      "count": 17,
+      "example_contexts": [
+        "\"Does the competition allow this form of distillation from proprietary API models?\" (topic_742807.txt)",
+        "\"Since this competition allows only one submission per day\" (topic_743140.txt)",
+        "\"the harness allows up to 1,000 skills, 50 MiB each, within the 3 GiB limit\" (topic_744133.txt)"
+      ]
+    },
+    {
+      "term": "allowed",
+      "sense": "legal",
+      "count": 16,
+      "example_contexts": [
+        "\"model: gemma-4-31b-it-qat-w4a16-ct        # the only allowed model\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"would that be allowed, or would it count as breaking the rules?\" (topic_744370.txt)",
+        "\"Is it allowed to fine-tune a LoRA on trajectories generated by gemma-4-31b itself\" (topic_743964.txt)",
+        "\"whether distillation from external API models (to generate SFT trajectories) is allowed — organizers said they're conferring\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"The agent uses the allowed, version-pinned `gemma-4-31b-it-qat-w4a16-ct` model.\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "no network",
+      "sense": "other",
+      "count": 11,
+      "example_contexts": [
+        "\"It uses no network and writes no files.\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"this kernel has no network\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "permitted",
+      "sense": "legal",
+      "count": 11,
+      "example_contexts": [
+        "\"I would expect this to be permitted here as well, subject to the competition's external data and model requirements.\" (topic_742807.txt)",
+        "\"private sharing of competition code or data outside of your team is, as always, not permitted.\" (topic_742815.txt)",
+        "\"Optional LoRA adapters are permitted but have not been evaluated here\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "clarify",
+      "sense": "ambiguous",
+      "count": 9,
+      "example_contexts": [
+        "\"Could you clarify whether participants may use proprietary models\" (topic_742807.txt)",
+        "\"Could the Competition Host please clarify the rules for receiving monetary prizes\" (topic_743297.txt)",
+        "\"Could the organizers clarify: (1) which sandbox/backend final patch validation uses\" (topic_744889.txt)"
+      ]
+    },
+    {
+      "term": "reject",
+      "sense": "banned",
+      "count": 9,
+      "example_contexts": [
+        "\"vLLM rejects any request where prompt + max_output_tokens > 32,768\" (topic_744692.txt)",
+        "\"the released bridge translates it into `reasoning_effort`, which the Kaggle runtime's LiteLLM rejects for this Gemma model\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "unclear",
+      "sense": "ambiguous",
+      "count": 9,
+      "example_contexts": [
+        "\"Skip this skill when ... location is unclear\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"status = \\\"unclear\\\"\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)"
+      ]
+    },
+    {
+      "term": "accepted",
+      "sense": "legal",
+      "count": 8,
+      "example_contexts": [
+        "\"agent.yaml # REQUIRED root (agent.yml / root_agent.yaml also accepted)\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"Since the accepted model is relatively large(31B Parameters)\" (topic_744256.txt)"
+      ]
+    },
+    {
+      "term": "exclusion",
+      "sense": "other",
+      "count": 8,
+      "example_contexts": [
+        "\"This yields **114 sound tasks and 15 exclusions**.\" (gemma-4-measure-before-you-tune.ipynb)",
+        "\"Whether the async exclusion is deliberate.\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "must not",
+      "sense": "banned",
+      "count": 8,
+      "example_contexts": [
+        "\"thoughts must NOT be removed between the function calls\" (topic_744354.txt)",
+        "\"must not also appear failed, errored or skipped\" (gemma-4-developer-agent-cpu-audit-tables.ipynb)",
+        "\"Unsupported reasoning_effort must not reach the endpoint\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "feature",
+      "sense": "ambiguous",
+      "count": 7,
+      "example_contexts": [
+        "\"I suspect this might be a \\\"feature\\\"\" (topic_744272.txt)"
+      ]
+    },
+    {
+      "term": "forbidden",
+      "sense": "banned",
+      "count": 7,
+      "example_contexts": [
+        "\"Snapshot comparisons remain assertions; update modes are forbidden.\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"raise ValueError(\\\"Snapshot update flags are forbidden during verification\\\")\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "ambiguous",
+      "sense": "ambiguous",
+      "count": 6,
+      "example_contexts": [
+        "\"only if exact search leaves an ambiguous symbol\" (gemma-4-measure-before-you-tune.ipynb)"
+      ]
+    },
+    {
+      "term": "rejected",
+      "sense": "banned",
+      "count": 5,
+      "example_contexts": [
+        "\"`tools`, `system_instruction`, `http_options`, `safety_settings`, `response_schema` are rejected inside it by design\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"helper tests had created a Python bytecode cache inside the submitted directory, which the official compiler correctly rejected\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"A prompt plus max_tokens over 32,768 is rejected as vLLM rejects it\" (topic_745143.txt)"
+      ]
+    },
+    {
+      "term": "unsupported",
+      "sense": "banned",
+      "count": 5,
+      "example_contexts": [
+        "\"raise RuntimeError(f\\\"{agent.name}: unsupported reasoning_effort in Gemma bridge\\\")\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "allowlist/whitelist",
+      "sense": "other",
+      "count": 4,
+      "example_contexts": [
+        "\"Frozen public selection differs from the strict ID allowlist\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "disallowed",
+      "sense": "banned",
+      "count": 4,
+      "example_contexts": [
+        "\"assert ext in ALLOWED_SUBMISSION_EXTENSIONS, f'Disallowed file extension: {info.filename}'\" (getting-started-gemma-4-developer-agent.ipynb)",
+        "\"print(\\\"disallowed files:\\\", bad or \\\"none\\\")\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)"
+      ]
+    },
+    {
+      "term": "internet off",
+      "sense": "other",
+      "count": 3,
+      "example_contexts": [
+        "\"Setup: Kaggle notebook, GPU L4 x4, Internet off\" (topic_743508.txt)"
+      ]
+    },
+    {
+      "term": "permission",
+      "sense": "other",
+      "count": 3,
+      "example_contexts": [
+        "\"Commands inherit official sandbox permissions, not a new filesystem jail.\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "restriction",
+      "sense": "banned",
+      "count": 3,
+      "example_contexts": [
+        "\"Are there any restrictions on which teacher models may be used?\" (topic_742807.txt)",
+        "\"Regarding provider restrictions on developing competing models\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "acceptable",
+      "sense": "ambiguous",
+      "count": 2,
+      "example_contexts": [
+        "\"Examples of acceptable teacher models would be very helpful.\" (topic_742807.txt)",
+        "\"Is a public Kaggle Dataset also acceptable?\" (topic_744941.txt)"
+      ]
+    },
+    {
+      "term": "approved",
+      "sense": "other",
+      "count": 2,
+      "example_contexts": [
+        "\"The replay reads only approved public task fields\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "blocked",
+      "sense": "banned",
+      "count": 2,
+      "example_contexts": [
+        "\"`..` traversal, symlinks and absolute paths are blocked.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"or longer if the server's event loop is blocked\" (topic_745138.txt)"
+      ]
+    },
+    {
+      "term": "closed registries",
+      "sense": "banned",
+      "count": 2,
+      "example_contexts": [
+        "\"the host resolves them against closed registries (`ToolRegistry`, `ModelRegistry`, `SkillRegistry`, `CallbackRegistry`). No Python entrypoint.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ]
+    },
+    {
+      "term": "eligibility",
+      "sense": "ambiguous",
+      "count": 2,
+      "example_contexts": [
+        "\"Prize payout eligibility for participants residing in Russia\" (topic_743297.txt)"
+      ]
+    },
+    {
+      "term": "may not",
+      "sense": "banned",
+      "count": 2,
+      "example_contexts": [
+        "\"a local validation path that may not match final scoring\" (topic_744889.txt)"
+      ]
+    },
+    {
+      "term": "network off",
+      "sense": "other",
+      "count": 2,
+      "example_contexts": [
+        "\"the swebench-sandbox image, network off\" (topic_743973.txt)"
+      ]
+    },
+    {
+      "term": "no internet",
+      "sense": "other",
+      "count": 2,
+      "example_contexts": [
+        "\"it needs no internet and no accelerator\" (gemma-4-lb-58-tasks-bronze-is-a-124-team-tie.ipynb)"
+      ]
+    },
+    {
+      "term": "not supported",
+      "sense": "banned",
+      "count": 2,
+      "example_contexts": [
+        "\"'>' not supported between instances of 'int' and 'str'\" (topic_744678.txt)"
+      ]
+    },
+    {
+      "term": "not sure",
+      "sense": "ambiguous",
+      "count": 2,
+      "example_contexts": [
+        "\"Not sure what else could cause non deterministic results\" (topic_743140.txt)",
+        "\"are not sure what a \\\"submission\\\" even is here\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)"
+      ]
+    },
+    {
+      "term": "permit",
+      "sense": "legal",
+      "count": 2,
+      "example_contexts": [
+        "\"The rules explicitly permit PEFT LoRA adapters on gemma-4-31b-it-qat-w4a16-ct\" (topic_744070.txt)",
+        "\"The published material does not permit offline reproduction of the graders' Phase 2\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "ToS",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"against their ToS\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "WAI",
+      "sense": "legal",
+      "count": 1,
+      "example_contexts": [
+        "\"I think this is WAI. Your notebook needs to generate a submission file (submission.zip)\" (topic_743683.txt)"
+      ]
+    },
+    {
+      "term": "against (their) ToS",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"It is very much against their ToS doing any type of distill...\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "air-gapped",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"**Network.** The grader sandbox is air-gapped.\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "banned",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"I worry a bit about getting my accounts banned or routed to inferior models for distillation.\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "breaking the rules",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"would that be allowed, or would it count as breaking the rules? I'd rather ask now than find out at the end.\" (topic_744370.txt)"
+      ]
+    },
+    {
+      "term": "compliance",
+      "sense": "ambiguous",
+      "count": 1,
+      "example_contexts": [
+        "\"This calculation does not establish compliance with the complete twelve-hour run budget\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ]
+    },
+    {
+      "term": "comply",
+      "sense": "legal",
+      "count": 1,
+      "example_contexts": [
+        "\"otherwise fully complies with the competition rules\" (topic_743297.txt)"
+      ]
+    },
+    {
+      "term": "gaming",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"30%+ verifier gaming when bootstrapping agents with model-generated tests\" (topic_745027.txt)"
+      ]
+    },
+    {
+      "term": "legal",
+      "sense": "other",
+      "count": 1,
+      "example_contexts": [
+        "\"is a legal resident of the Russian Federation\" (topic_743297.txt) — only use; residence sense, not rule-legality"
+      ]
+    },
+    {
+      "term": "network_mode=none",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"Docker `swebench-sandbox:latest`, linux/amd64, `network_mode=none`, 4 GiB, 2 vCPU\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "not allowed",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"Kids under 13 years of age are not allowed to participate on Kaggle.\" (topic_742815.txt)"
+      ]
+    },
+    {
+      "term": "not permitted",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"private sharing of competition code or data outside of your team is, as always, not permitted.\" (topic_742815.txt)"
+      ]
+    },
+    {
+      "term": "off the table",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"So models like Claude and GPT are off the table, but Muse and Chinese aren't?\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "permissible",
+      "sense": "legal",
+      "count": 1,
+      "example_contexts": [
+        "\"training a model solely for this competition may be permissible\" (topic_742807.txt)"
+      ]
+    },
+    {
+      "term": "reward hacking",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"Reward Hacking Guards: Has anyone else observed 30%+ verifier gaming\" (topic_745027.txt)"
+      ]
+    },
+    {
+      "term": "tamper",
+      "sense": "banned",
+      "count": 1,
+      "example_contexts": [
+        "\"(HARNESS_README, \\\"Anti-Tampering Test & Config Reset\\\"). In practice nothing gets reset.\" (topic_744825.txt)"
+      ]
+    },
+    {
+      "term": "undocumented",
+      "sense": "ambiguous",
+      "count": 1,
+      "example_contexts": [
+        "\"**The verification timeout is undocumented.**\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ]
+    },
+    {
+      "term": "ban",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "cheat",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "denied",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "disqualified",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "disqualify",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "eligible",
+      "sense": "legal",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "forbid",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "illegal",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "prohibit",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "prohibited",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "restricted",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "terms of service",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "unsure",
+      "sense": "ambiguous",
+      "count": 0,
+      "example_contexts": []
+    },
+    {
+      "term": "violate",
+      "sense": "banned",
+      "count": 0,
+      "example_contexts": []
+    }
+  ],
+  "disputed": [
+    {
+      "question": "Is distillation from proprietary API models (e.g. \"OpenAI Astra or Claude Opus 5.5\") allowed for generating training patches/trajectories? Are some teacher models excluded?",
+      "positions": [
+        "\"My understanding is that using external LLM APIs to generate synthetic training data has generally been allowed ... Given Section 2.6, I would expect this to be permitted here as well\" (topic_742807.txt)",
+        "Host (Ryan Holbrook): \"We are confering and will have an answer for you soon.\" (topic_742807.txt)",
+        "Host (Ashley Oldacre, truncated): \"As long as you are using those models in accordance with their model license terms, and the output you're using to submit to that competitio...\" (topic_742807.txt)",
+        "\"So models like Claude and GPT are off the table, but Muse and Chinese aren't?\" (topic_742807.txt)",
+        "\"It is very much against their ToS doing any type of distill...\" (topic_742807.txt)",
+        "\"I worry a bit about getting my accounts banned or routed to inferior models for distillation.\" (topic_742807.txt)",
+        "\"**Also unresolved:** whether distillation from external API models (to generate SFT trajectories) is allowed — organizers said they're conferring.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"External demonstrations require source licences, provenance and repository separation.\" (gemma-4-measure-before-you-tune.ipynb)"
+      ],
+      "resolved": "unclear: host answered 2026-09-29 conditionally on model license terms (reply truncated in file); participant follow-up reads it as excluding Claude/GPT, not confirmed"
+    },
+    {
+      "question": "Must winners release trained weights/adapters for unrestricted use (Sections 2.5 and 2.8) if a model was trained only for the competition?",
+      "positions": [
+        "\"would winners need to release the trained weights or adapters for unrestricted use outside the competition?\" (topic_742807.txt)"
+      ],
+      "resolved": "unclear: no answer visible"
+    },
+    {
+      "question": "Is fine-tuning on self-generated gemma-4-31b trajectories, or on outputs of other open-weight models, allowed?",
+      "positions": [
+        "\"Is it allowed to fine-tune a LoRA on trajectories generated by gemma-4-31b itself (self-generated and filtered by our own tests)? Is there any update on using outputs from other open-weight models?\" (topic_743964.txt)",
+        "\"If not, I'll just start with GLM 5.3\" (topic_742807.txt)",
+        "\"I wouldn't do this with closed source models but ... you can get some good gains from open source KD.\" (topic_742807.txt)"
+      ],
+      "resolved": "unclear: host reply covers 12h/parallel/LoRA (truncated); no visible answer on training data"
+    },
+    {
+      "question": "May an agent add a missing test dependency (e.g. typing_inspection) to its own patch, or is that breaking the rules?",
+      "positions": [
+        "\"if an agent notices the missing package and works around it by adding it into its own patch, would that be allowed, or would it count as breaking the rules?\" (topic_744370.txt)",
+        "Host: \"I can confirm that the hidden tasks validate at 100% with a \\\"gold patch\\\" submission.\" (topic_744370.txt)",
+        "\"Do not install packages or repair the harness. A dependency/Python-version failure is evidence about the check, not permission to change dependencies.\" (gemma4-baseline-agent-v2-compile-fixed.ipynb)",
+        "\"Run the whole test suite, install packages, or search outside /workspace.\" listed under \"Never\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)"
+      ],
+      "resolved": "unresolved: host did not answer the rules question; implied unnecessary for hidden tasks"
+    },
+    {
+      "question": "Which base models are allowed (only gemma-4-31b-it-qat-w4a16-ct, or other Gemma 4 sizes/precisions such as E2B/E4B, bf16 31B/27B)?",
+      "positions": [
+        "\"model: gemma-4-31b-it-qat-w4a16-ct        # the only allowed model\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"The current Model Selection, Budget, and Harness Rules require gemma-4-31b-it-qat-w4a16-ct for every agent and subagent ... This corrects the earlier inference from the broader model aliases present in the supplied library.\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"One base model per submission. The default `gemma-4-31b-it-qat-w4a16-ct` (INT4) is the pragmatic pick\"; \"bf16 31B/27B fit but leave the cache tight\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"Local Models (E4B/E2B) possible? Separate LB likely?\" (topic_743531.txt)",
+        "\"Since the accepted model is relatively large(31B Parameters)\" (topic_744256.txt)"
+      ],
+      "resolved": "resolved by quoted rules (only gemma-4-31b-it-qat-w4a16-ct); no host reply on a small-model track"
+    },
+    {
+      "question": "Do LoRA adapters actually work/score on the scorer?",
+      "positions": [
+        "\"The rules explicitly permit PEFT LoRA adapters ... produces ValueError: Gemma4ForConditionalGeneration does not support LoRA yet\" (topic_744070.txt)",
+        "\"This affects any submission that ships an adapter, because it would score exactly like the base model.\" (topic_743508.txt)",
+        "\"any submission that carries an adapter would stall on most tasks\" (topic_744331.txt)",
+        "\"LoRA adapters | Participants report adapters currently have no effect (forum topic 743508)\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"no public submission has yet scored *with* an adapter\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "\"A separate synthetic low-rank adaptation (LoRA) test shows that a nonzero adapter changes inference through the inspected competition wheel.\" (gemma-4-measure-before-you-tune.ipynb)",
+        "Host: \"The zeroing fix landed in v23 of the wheelhouse dataset (now on v25).\" (topic_743508.txt); \"Now vLLM will set its LoRA params dynamically based on what you actually submit.\" (topic_744794.txt)",
+        "\"our adapter submission 56719837 ... completed after about 30 minutes with no score\" (topic_744331.txt)"
+      ],
+      "resolved": "partially: host says loading, zeroing and KV-cache issues fixed (v23-v25, dynamic params); scored adapter submissions still unconfirmed"
+    },
+    {
+      "question": "What happens at the 12-hour limit: does the whole submission error, or are unfinished tasks scored 0?",
+      "positions": [
+        "Host: \"Currently, hitting the 12-hour limit will error, but I'm planning on a fix that will score unfinished t...\" (topic_743063.txt)",
+        "Host (Sep 28): \"12h overrun: Not yet. Budget per task using eval_config.yaml.\" (topic_743964.txt)",
+        "\"Is this fix live yet?\" / \"do you have any update on scoring unfinished tasks as 0?\" (topic_743063.txt)",
+        "\"is the change that scores unfinished tasks as 0 at the 12 h limit already live?\" (topic_744861.txt)",
+        "\"My best guess is the 12-hour limit: tasks that used to be refused early now run their full time.\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)"
+      ],
+      "resolved": "no: still errors as of last host statement (Sep 28); fix not confirmed"
+    },
+    {
+      "question": "Does queue time count against the 12-hour limit (from Submit vs from scoring start)?",
+      "positions": [
+        "\"Does the 12-hour limit start when the scoring run starts, or when we click Submit?\" (topic_744099.txt)",
+        "\"timeout after 14 hours in my case :(\" (topic_743683.txt)",
+        "\"Scoring Time: 14.5 hours\" for an LB 0.08 fork (topic_743140.txt)",
+        "\"It takes approximately 12 hours\" (topic_743683.txt)"
+      ],
+      "resolved": "unclear: no host answer"
+    },
+    {
+      "question": "Which eval_config.yaml fields does the scorer read and what are the defaults?",
+      "positions": [
+        "Host: \"The scorer reads those, and only those, four fields. The default is no limit.\" (topic_743063.txt)",
+        "Harness defaults read from swegemma 0.2.7: timeout_seconds 300, max_tool_calls None, max_time_minutes 60.0, max_turns 500; \"The wrapper that reads the file was not published, so *whether* and *where* it applies them is an assumption\" (gemma-4-developer-agent-cpu-audit-tables.ipynb)",
+        "Quick reference: \"Wall-clock / task | **60 min**\", \"Max turns / task | **500**\", \"Single command timeout | **300 s**\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "Starter code defaults: timeout_seconds 300, max_tool_calls 100, max_time_minutes 60.0 (getting-started-gemma-4-developer-agent.ipynb)"
+      ],
+      "resolved": "partially: four fields confirmed by host; defaults conflict (\"no limit\" vs harness/starter defaults)"
+    },
+    {
+      "question": "What compaction token_threshold/interval does the scorer use (32,768 vs 14,336; interval 5 vs 15)?",
+      "positions": [
+        "\"HARNESS_README §7.2 lists 32,768 for scoring, but vLLM rejects any request where prompt + max_output_tokens > 32,768, so the prompt never reaches the threshold\" (topic_744692.txt)",
+        "\"Current harness readme says (since sep 25 update). ... compaction_interval = 5 ... token_threshold = 14,336\" (topic_744692.txt)",
+        "Starter evaluator uses compaction_interval=15, token_threshold=14336 (getting-started-gemma-4-developer-agent.ipynb); scorer per README interval 5 (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)",
+        "\"Is there a way to higher the compaction threshold ? ... I guess same setup on eval.\" (topic_744794.txt)"
+      ],
+      "resolved": "unclear: host \"Thanks, I will look into it.\" / \"I'll look into the compaction issue.\""
+    },
+    {
+      "question": "Is double JSON-encoding of tool results a bug or intended (a \"feature\")?",
+      "positions": [
+        "\"I don't know whether this is a bug or a feature, or whether it should be fixed\" (topic_744272.txt)",
+        "\"However, I suspect this might be a \\\"feature\\\" (or you can call it a ...\" (topic_744272.txt)",
+        "Host: \"Thanks for the report. Addressing now.\" / \"The latest wheelhouse should have this fixed.\" (topic_744272.txt)",
+        "\"the fix is live in the 09-30 wheelhouse. Tool results now reach the model as one level of JSON\" (topic_744272.txt)"
+      ],
+      "resolved": "yes (bug), fixed in 09-30 wheelhouse per host and participant"
+    },
+    {
+      "question": "Is dropping the model's thoughts between tool calls (reasoning_content ignored) intended, and will the scorer be patched?",
+      "positions": [
+        "\"Can you confirm this is unintended? Will the scoring environment be patched\" (topic_744354.txt)",
+        "Host: \"Yes, this is unambiguously a bug. The fix should be in the current wheelhouse.\" (topic_744354.txt)",
+        "\"With the fix in place the agent hits compaction limits and context limit...\" (topic_744354.txt)"
+      ],
+      "resolved": "yes (bug), fixed per host"
+    },
+    {
+      "question": "Does include_thoughts:false disable reasoning entirely (should it only hide thoughts)?",
+      "positions": [
+        "\"include_thoughts currently disables reasoning instead of only hiding it [adk_submission 0.2.12]\" (topic_745059.txt)",
+        "\"thinking off: much faster per turn; many public entries report timeouts with it on\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)"
+      ],
+      "resolved": "unresolved: no host reply"
+    },
+    {
+      "question": "Are thinking_budget and seed forwarded to vLLM, and is thinking_budget a hard cap?",
+      "positions": [
+        "\"thinking_budget=4096 and thinking_budget=1024 produced the same HTTP body ... The seed field was missing.\" (topic_744566.txt)",
+        "Host: \"I will patch.\" / \"The most recent wheelhouse dataset should have the patches.\" (topic_744566.txt)",
+        "\"Thanks for fixing reasoning persistence and thinking_budget forwarding.\" (topic_745059.txt)",
+        "\"The released implementation does not demonstrate that `thinking_budget` is a hard vLLM reasoning-token cap\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"The baseline declares seed 42 in YAML, but the installed Agent Development Kit (ADK) conversion omitted that seed\" (gemma-4-measure-before-you-tune.ipynb)"
+      ],
+      "resolved": "yes per host (patched); hard-cap behaviour unverified"
+    },
+    {
+      "question": "Do gold patches pass in the scoring environment (FastAPI/requests/rich failures), i.e. are tasks solvable?",
+      "positions": [
+        "\"If that's right, nobody can solve the fastapi tasks at the moment, even with a perfect fix. That's around half of the 129 tasks.\" (topic_744370.txt)",
+        "\"These are definite dataset bugs, and gold patch cannot pass on py3.13\" (topic_743973.txt)",
+        "Host: \"The tasks in the test set have been more rigorously filtered. I can confirm that a submission with \\\"gold patches\\\" validates at 100%. We will work on improving the training set.\" (topic_744259.txt)",
+        "\"Could you please fix the training data, inline snapshots are missing in a lot of the fastapi tasks.\" (topic_744370.txt)",
+        "Public audits: 119/129 sound (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb); 114/129 sound (gemma-4-measure-before-you-tune.ipynb)"
+      ],
+      "resolved": "yes for hidden test set (host); public training set issues acknowledged, not fixed"
+    },
+    {
+      "question": "Is the README resolution rule (exit code 0) the real rule, or does the scorer also require JUnit/required nodes?",
+      "positions": [
+        "\"`HARNESS_README.md` section 8.2 states only rule 1 (\\\"resolved if and only if pytest exits with return code 0\\\"). Rules 2-4 are in the code and not in the document.\" (gemma-4-developer-agent-cpu-audit-tables.ipynb)",
+        "\"under the criterion the organisers re-issued on **2026-09-25** (pytest exit code 0 **and** a JUnit XML in which every required test node passed explicitly)\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)"
+      ],
+      "resolved": "resolved by README re-issue on 2026-09-25 (per participant audit)"
+    },
+    {
+      "question": "Can a `.py` skill script execute inside the sandbox (custom Python via skills) given \"no agent.py\"?",
+      "positions": [
+        "\"**Whether a `.py` skill script executes inside the sandbox.** The allowed-extension list calls `.py` \\\"ADK skill scripts\\\" while `adk-submission` states it never imports competitor Python.\" (119-of-129-sound-the-gemma-4-grader-rebuilt.ipynb)",
+        "\"Skills ... let your agent run your own Python *inside the sandbox* via `run_skill_script`\" (gemma-4-dev-agent-zero-to-first-valid-submission.ipynb)",
+        "\"Twelve local software and ADK integration checks passed, covering ... the actual ADK script executor.\" (gemma-and-the-shape-of-doubt.ipynb)",
+        "\"Submissions are **declarative YAML only** ... No `agent.py`.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ],
+      "resolved": "unclear officially; participants report it works locally"
+    },
+    {
+      "question": "Is shipping many skills (bloating a submission) allowed?",
+      "positions": [
+        "\"whats stopping someone from putting up a whole submission bloated with skills\" (topic_744133.txt)",
+        "\"Nothing stops it: the harness allows up to 1,000 skills, 50 MiB each, within the 3 GiB limit. That said, the ADK puts every skill's name and description into each model call\" (topic_744133.txt)"
+      ],
+      "resolved": "yes (participant reading of limits); no host statement"
+    },
+    {
+      "question": "Are callbacks (before_model_callbacks etc.) usable in agent YAML?",
+      "positions": [
+        "\"Callbacks: SandboxedLlmAgentConfig accepts before_model_callbacks, after_model_callbacks, before_...\" (topic_743964.txt)",
+        "\"the host resolves them against closed registries (`ToolRegistry`, `ModelRegistry`, `SkillRegistry`, `CallbackRegistry`)\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)"
+      ],
+      "resolved": "unclear: follow-up unanswered"
+    },
+    {
+      "question": "Should an undeclared/hallucinated tool call end the task with a 0, or be returned to the model as an error?",
+      "positions": [
+        "\"the session ends through the except Exception path and the task scores 0 even if the agent had already made a correct edit\" (topic_745028.txt)",
+        "\"I already removed search_similar_code ... but the model still attempts to use it (the ADK forced into the system prompt), which immediately causes a fatal error\" (topic_745052.txt)",
+        "Host: \"Yes, let me look into it and I'll implement something.\" (topic_745028.txt)"
+      ],
+      "resolved": "pending (host agreed to implement something)"
+    },
+    {
+      "question": "Should search_similar_code output be capped like other tools?",
+      "positions": [
+        "\"Would it fit the design to cap the code field per result ... or to apply the same max_stdout_chars limit as the other tools?\" (topic_744577.txt)",
+        "Host: \"I will limit to max_stdout_chars like other tools.\" (topic_744577.txt)",
+        "\"How we can limit in our local setup ?\" (topic_744577.txt)"
+      ],
+      "resolved": "yes (host committed); deployment not confirmed"
+    },
+    {
+      "question": "Are the near-collapsed embeddings expected, and does the hidden set use the same pipeline?",
+      "positions": [
+        "\"Is this expected (e.g., a model that embeds mostly boilerplate), or could the embedding step be regenerated? Does the hidden test set use the same embeddings pipeline?\" (topic_744040.txt)",
+        "\"Independent check on our side, consistent with yours\" (topic_744040.txt)",
+        "\"Treat `search_similar_code` as a weak hint, not proof: embeddings may return unrelated boilerplate.\" (gemma4-baseline-agent-v2-compile-fixed.ipynb)"
+      ],
+      "resolved": "unresolved: no host reply"
+    },
+    {
+      "question": "Does the anti-tampering test reset actually work (edits to existing test files)?",
+      "positions": [
+        "\"verify_task should reset agent-modified test/config files before applying test_patch ... In practice nothing gets reset.\" (topic_744825.txt)",
+        "Host: \"Addressing now.\" (topic_744825.txt)"
+      ],
+      "resolved": "acknowledged, fix pending"
+    },
+    {
+      "question": "Which sandbox backend does final validation use, and are src-layout packages (Requests) importable?",
+      "positions": [
+        "\"Could the organizers clarify: (1) which sandbox/backend final patch validation uses; (2) how src-layout packages are made importable\" (topic_744889.txt)",
+        "Host: \"This may be a problem with the subprocess sandbox. ... The private Docker sandbox uses the same base image but installs a different set of...\" (topic_742882.txt)",
+        "\"They are not equivalent for verification: ... for a class named `SubprocessManager` it skips test dependency installation entirely\" (gemma-4-developer-agent-cpu-audit-tables.ipynb)"
+      ],
+      "resolved": "unclear for Requests src-layout; host indicates Docker sandbox privately"
+    },
+    {
+      "question": "Do published snapshots match task base_commit?",
+      "positions": [
+        "\"Neither specified commit is present in its archive's Git objects.\" (topic_744078.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Will the scorer serve the updated (2026-07-15) Gemma 4 chat template?",
+      "positions": [
+        "\"Would the organizers consider serving the updated template (or passing --chat-template) for scoring?\" (topic_744844.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Should infra-failed submissions be rerun / not count toward the daily limit?",
+      "positions": [
+        "\"if the daily submission limit is 1, we should only count it towards a successful submission. Anything that's infra related should not ...\" (topic_744807.txt)",
+        "\"would be great if the failed runs are started again or the daily limit be reset!\" (topic_744807.txt)",
+        "\"so are we getting a reset for our troubles or are we just sol?\" (topic_744965.txt)",
+        "\"it doesn't make sense to loose daily submission limit when the problem happens before the task actually started.\" (topic_744924.txt)",
+        "Host (Sep 26): \"I will rerun the affected submissions on Monday\"; later \"I'm going to pause the rescore\" (topic_743683.txt)"
+      ],
+      "resolved": "unresolved for the Oct 1 outage"
+    },
+    {
+      "question": "Is a CPU-only submission notebook (embedded zip, no accelerator) still supported?",
+      "positions": [
+        "\"Is a CPU-only submission notebook like ours still supported?\" (topic_744861.txt)",
+        "\"a **CPU** notebook that writes `/kaggle/working/submission.zip` runs in seconds and can be submitted from its Output tab\" (gemma-4-dev-agent-task-anatomy-survival-kit.ipynb)",
+        "Host: \"Your notebook needs to generate a submission file (submission.zip) before that submission can be scored.\" (topic_743683.txt)"
+      ],
+      "resolved": "unclear: no direct host answer"
+    },
+    {
+      "question": "Does linking code from a paper-track Writeup via a public Notebook or Dataset satisfy the public code-sharing rule?",
+      "positions": [
+        "\"does it satisfy the rule to publish that code as a public Kaggle Notebook attached to this competition and post the link here the same day? Is a public Kaggle Dataset also acceptable?\" (topic_744941.txt)",
+        "\"I am posting it here because the rules ask that publicly shared competition code also be shared on this forum.\" (topic_745143.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Can prizes be paid to residents of Russia (not sanctioned, not in excluded territories)?",
+      "positions": [
+        "\"Can monetary prizes currently be paid to residents of Russia?\" (topic_743297.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Are parallel sub-agents / concurrent model calls allowed and served concurrently?",
+      "positions": [
+        "\"If a submission uses a ParallelAgent (e.g., 3 attempts per task), are those LLM calls actually served concurrently by vLLM on the 4×L4 scoring machine?\" (topic_743964.txt)",
+        "Host: \"Parallel: I we don't support parallel calls.\" (topic_743964.txt); \"Sequentially.\" (topic_743063.txt)"
+      ],
+      "resolved": "no (host)"
+    },
+    {
+      "question": "Can per-task budgets be adaptive within the 12 hours?",
+      "positions": [
+        "\"do we have control on adaptive budget like out of 12 hours, i wnat 1 task to take 8 minutes, otehr to take 4 minte\" (topic_743063.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Does `!include` allow parent-directory paths (`../`)?",
+      "positions": [
+        "\"`..` traversal, symlinks and absolute paths are blocked.\" (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "Same notebook's bundle uses \"instruction: !include ../prompts/analyzer.md\" in sub_agents/code_analyzer.yaml (gemma-4-dev-agent-what-moves-the-leaderboard.ipynb)",
+        "Participant checker: \"assert not Path(relative).is_absolute() and \\\"..\\\" not in Path(relative).parts\" (gemma-4-measure-before-you-tune.ipynb)"
+      ],
+      "resolved": "unclear: internal inconsistency in one notebook; no official statement in files"
+    },
+    {
+      "question": "Is the host sample sampling.yaml (max_output_tokens 16384) safe to use?",
+      "positions": [
+        "\"with the sample config, **every call whose prompt reaches 16,385 tokens is refused**\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)",
+        "\"I submitted exactly this change (8,192 ...). The scorer returned an error with no score, and it does not say why.\" (gemma-4-a-16384-output-cap-refuses-long-prompts.ipynb)",
+        "Starter rewrites sampling.yaml with max_output_tokens: 16384 (getting-started-gemma-4-developer-agent.ipynb)"
+      ],
+      "resolved": "unclear: refusal mechanism measured; safe value not confirmed by host"
+    },
+    {
+      "question": "Are scores deterministic?",
+      "positions": [
+        "\"Are the results deterministic - I see \\\"temperature\\\": 0.2 which could have some variation.\" (topic_743140.txt)",
+        "\"The runs are therefore neither deterministic nor matched-seed experiments.\" (gemma-4-measure-before-you-tune.ipynb)",
+        "\"Deterministic packaging does not imply deterministic inference.\" (gemma-and-the-shape-of-doubt.ipynb)"
+      ],
+      "resolved": "no (participant evidence: seed not forwarded); no host statement"
+    },
+    {
+      "question": "Must post-training happen on own GPUs, or can Kaggle notebooks (4xL4) be used?",
+      "positions": [
+        "\"Do we have to do it on our own GPUs ... or can we use Kaggle notebooks for it.\" (topic_743186.txt)",
+        "\"They are providing GPU access for us already, You can access it in kaggle notebook, 30 hours/week is the quota . You can train or test there.\" (topic_744256.txt)",
+        "\"No it isn't realistiic to participate in kaggle competitions using only kaggle resources.\" (topic_744054.txt)"
+      ],
+      "resolved": "participant answers only; no host statement"
+    },
+    {
+      "question": "Does the harness support TPU?",
+      "positions": [
+        "\"does the harness support tpu jax ?\" (topic_744589.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    },
+    {
+      "question": "Will official per-task Docker images be released?",
+      "positions": [
+        "\"I am writing to see if the hosts of this competition would like to release official public images per tasks.\" (topic_744355.txt)"
+      ],
+      "resolved": "unresolved: no reply"
+    }
+  ]
+}

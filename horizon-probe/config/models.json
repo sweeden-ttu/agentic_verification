@@ -1,0 +1,14 @@
+{
+  "notes": "rank orders models from largest to smallest (higher = larger) and is what tier_pivot/3 in prolog/horizon.pl splits on. Set enabled=false to skip a model. A model with a launch block is started before its calls and stopped after; otherwise its server must already be running. anthropic models read ANTHROPIC_API_KEY.",
+  "models": [
+    {"id": "opus", "enabled": true, "rank": 7, "provider": "anthropic", "model": "claude-opus-5-5", "concurrency": 4},
+    {"id": "sonnet", "enabled": true, "rank": 6, "provider": "anthropic", "model": "claude-sonnet-5-5", "concurrency": 4},
+    {"id": "gemma4-31b", "enabled": true, "rank": 5, "provider": "openai", "base_url": "http://127.0.0.1:8000/v1", "model": "google/gemma-4-31B-it-qat-w4a16-ct", "logprobs": true, "concurrency": 4, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}}},
+    {"id": "gemma4-26b-a4b", "enabled": true, "rank": 4, "provider": "openai", "base_url": "http://127.0.0.1:8001/v1", "model": "google/gemma-4-26B-A4B-it", "logprobs": true, "concurrency": 4, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}}},
+    {"id": "gemma4-12b", "enabled": true, "rank": 3, "provider": "openai", "base_url": "http://127.0.0.1:8002/v1", "model": "google/gemma-4-12B-it", "logprobs": true, "concurrency": 4, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}}},
+    {"id": "gemma4-e4b", "enabled": true, "rank": 2, "provider": "openai", "base_url": "http://127.0.0.1:8082/v1", "model": "gemma-4-E4B", "logprobs": true, "concurrency": 1, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}},
+     "launch": {"cmd": [".tools/env/bin/llama-server", "-m", "models/gemma-4-E4B_q4_0-it.gguf", "--port", "8082", "-c", "8192", "--jinja"], "health": "http://127.0.0.1:8082/health", "timeout_s": 600}},
+    {"id": "gemma4-e2b", "enabled": true, "rank": 1, "provider": "openai", "base_url": "http://127.0.0.1:8081/v1", "model": "gemma-4-E2B", "logprobs": true, "concurrency": 1, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}},
+     "launch": {"cmd": [".tools/env/bin/llama-server", "-m", "models/gemma-4-E2B_q4_0-it.gguf", "--port", "8081", "-c", "8192", "--jinja"], "health": "http://127.0.0.1:8081/health", "timeout_s": 600}}
+  ]
+}
