@@ -44,8 +44,8 @@ def repo(tmp_path, monkeypatch):
       "def add(a, b):\n    return a - b\n", encoding="utf-8"
   )
   _git(tmp_path, "init", "-q")
-  _git(tmp_path, "config", "user.email", "t@example.com")
-  _git(tmp_path, "config", "user.name", "t")
+  _git(tmp_path, "config", "user.email", "scott.weeden@gmail.com")
+  _git(tmp_path, "config", "user.name", "sweeden-tty")
   _git(tmp_path, "add", "-A")
   _git(tmp_path, "commit", "-qm", "baseline")
   monkeypatch.setenv("SWE_WORKSPACE", str(tmp_path))
