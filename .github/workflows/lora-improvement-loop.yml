@@ -4,12 +4,12 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "lora-improvement-loop/**"
+      - "modules/lora-improvement-loop/**"
       - ".github/workflows/lora-improvement-loop.yml"
   pull_request:
     branches: ["main"]
     paths:
-      - "lora-improvement-loop/**"
+      - "modules/lora-improvement-loop/**"
       - ".github/workflows/lora-improvement-loop.yml"
 
 permissions:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: lora-improvement-loop
+        working-directory: modules/lora-improvement-loop
 
     steps:
       - uses: actions/checkout@v4
@@ -32,8 +32,8 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: |
-            lora-improvement-loop/requirements.txt
-            lora-improvement-loop/requirements-dev.txt
+            modules/lora-improvement-loop/requirements.txt
+            modules/lora-improvement-loop/requirements-dev.txt
 
       - name: Install dependencies
         run: |

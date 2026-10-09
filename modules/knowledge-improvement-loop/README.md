@@ -96,4 +96,4 @@ and rock-paper-scissors.
 
 - [Guide](docs/guides/knowledge_loop/index.md)
 - [LoRA improvement loop](../lora-improvement-loop/README.md)
-- [horizon-probe](../horizon-probe/README.md), the source of the Bayesian decomposition
+- [horizon-probe](../../experiments/horizon-probe/README.md), the source of the Bayesian decomposition
